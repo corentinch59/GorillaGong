@@ -55,13 +55,14 @@ Shader "Unlit/ScoreBar"
 
                 float3 bgColor = float3(0, 0, 0);
                 float scoreMask = _Score > i.uv.x;
+                float3 scoreColor = lerp(scoreBarColor1, scoreBarColor2, i.uv.x);
 
                 if(_Player > 0)
                 {
                     scoreMask = _Score > (1 - i.uv.x);
+                    scoreColor = lerp(scoreBarColor2, scoreBarColor1, i.uv.x);
                 }
                 
-                float3 scoreColor = lerp(scoreBarColor1, scoreBarColor2, i.uv.x);
                 float3 outColor = lerp(bgColor, scoreColor, scoreMask);
                 return float4(outColor, scoreMask); // instead of scoreMask, make it 0
             }
