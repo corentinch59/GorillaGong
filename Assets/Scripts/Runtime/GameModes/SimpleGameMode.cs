@@ -18,14 +18,11 @@ namespace Runtime.GameModes
 
         protected override void GeneratePatterns()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 _patterns.Add(UnityEngine.Random.Range(0, 4));
             }
-            foreach (var pattern in _patterns)
-            {
-                Debug.Log($"pattern: {pattern}");
-            }
+            Debug.Log($"Patterns: {string.Join(", ", _patterns)}");
         }
     }
 }

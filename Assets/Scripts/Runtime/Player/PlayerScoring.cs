@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField, BoxGroup("Configuration")] private FloatVariable _maxScore;
         public IReadOnlyReactiveProperty<float> Score => _score;
+        [SerializeField, ReadOnly]
         private ReactiveProperty<float> _score = new();
 
         public void AddScore(float amount)

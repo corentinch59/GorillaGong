@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerManager: {fileID: 0}
   _gameModeConfigs: {fileID: 11400000, guid: 6e4fc92829481234bb325ac56a49797c, type: 2}
+  _scoreToReach: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
+  _gameFinishedEvent: {fileID: 11400000, guid: 33632dc6e06f3da469926284c71d7bd6, type: 2}
