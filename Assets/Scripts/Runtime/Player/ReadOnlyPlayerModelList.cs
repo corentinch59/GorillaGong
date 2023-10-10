@@ -7,7 +7,7 @@ namespace Game
 {
     public abstract class ReadOnlyPlayerModelList : ScriptableObject, IEnumerable<IPlayerModel>
     {
-        private List<IPlayerModel> _players;
+        protected List<IPlayerModel> _players;
 
         public ReadOnlyPlayerModelList(IEnumerable<IPlayerModel> players)
         {
