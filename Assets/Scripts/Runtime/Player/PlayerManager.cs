@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,13 +10,20 @@ namespace Game
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private InputActionAsset _actionAsset;
+        [SerializeField] private PlayerModelList
 
         [SerializeField] private List<Player> m_Players = new ();
         [SerializeField] private List<PlayerBindings> m_Bindings = new ();
+        [SerializeField] private List<IPlayerModel> m_PlayerModels = new ();
 
         public IReadOnlyList<Player> GetPlayers()
         {
             return m_Players;
+        }
+
+        private void Awake()
+        {
+            m_PlayerModels = m_Players.Cast<IPlayerModel>().ToList();
         }
 
         private void Start()

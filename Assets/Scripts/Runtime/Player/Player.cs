@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace Game
 {
-    public partial class Player : MonoBehaviour
+    public partial class Player : MonoBehaviour, IPlayerModel
     {
         private InputActionMap _actionMap;
         private UnityEvent _onInputTriggered;

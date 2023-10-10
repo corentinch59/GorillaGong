@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PlayerModelList : ScriptableObject
+    public class PlayerModelList : ReadOnlyPlayerModelList
     {
-        private List<PlayerModel> _mPlayers = new();
+        private List<IPlayerModel> _mPlayers = new();
 
-        public List<PlayerModel> Players => _mPlayers;
+        public List<IPlayerModel> Players => _mPlayers;
+        public override IReadOnlyList<IPlayerModel> PlayerModels => _mPlayers;
     }
 }
 
