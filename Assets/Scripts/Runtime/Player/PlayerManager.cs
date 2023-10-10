@@ -10,7 +10,6 @@ namespace Game
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private InputActionAsset _actionAsset;
-        [SerializeField] private PlayerModelList
 
         [SerializeField] private List<Player> m_Players = new ();
         [SerializeField] private List<PlayerBindings> m_Bindings = new ();
