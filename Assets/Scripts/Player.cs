@@ -12,10 +12,7 @@ namespace Game
     {
         private InputActionMap _actionMap;
 
-        public event Action<Player, InputAction> OnULpressed;
-        public event Action<Player, InputAction> OnURpressed;
-        public event Action<Player, InputAction> OnBLpressed;
-        public event Action<Player, InputAction> OnBRpressed;
+        public event Action<Player, int> OnInputPressed;
 
         #region PROPERTIES
         public InputActionMap ActionMap
@@ -40,25 +37,25 @@ namespace Game
         public void NotifyULpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnULpressed?.Invoke(this, ctx.action);
+            OnInputPressed?.Invoke(this, 0);
         }
 
         public void NotifyURpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnURpressed?.Invoke(this, ctx.action);
+            OnInputPressed?.Invoke(this, 1);
         }
 
         public void NotifyBLpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnBLpressed?.Invoke(this, ctx.action);
+            OnInputPressed?.Invoke(this, 2);
         }
 
         public void NotifyBRpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnBRpressed?.Invoke(this, ctx.action);
+            OnInputPressed?.Invoke(this, 3);
         }
     }
 }

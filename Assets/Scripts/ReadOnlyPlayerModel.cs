@@ -7,9 +7,7 @@ namespace Game
 {
     public abstract class ReadOnlyPlayerModel
     {
-        protected ReactiveProperty<int> Score = new();
-
-        public ReactiveProperty<int> GetScore => Score;
+        public abstract ReactiveProperty<int> Score { get; }
 
         protected ReadOnlyPlayerModel(int score)
         {
