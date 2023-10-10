@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 
 namespace Game
 {
-    public class Player : MonoBehaviour
+    public partial class Player : MonoBehaviour
     {
         private InputActionMap _actionMap;
 
