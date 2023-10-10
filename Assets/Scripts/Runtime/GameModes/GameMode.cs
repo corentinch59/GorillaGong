@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game;
 using Runtime.GameModes.Config;
-using UnityEngine.InputSystem;
+using UnityEngine;
 
 namespace Runtime.GameModes
 {
@@ -47,13 +47,16 @@ namespace Runtime.GameModes
             {
                 player.AddScore(_config.ScoreGain);
                 // TODO: trigger SOEvents PlayerSuccess
-
+                Debug.Log("WIN");
             }
             else
             {
                 player.RemoveScore(_config.ScoreLoss);
                 // TODO: trigger SOEvents PlayerFail
+                Debug.Log("LOSS");
             }
+
+            _playersCurrentIteration[player]++;
         }
 
         protected abstract void GeneratePatterns();
