@@ -3,16 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 namespace Game
 {
     public partial class Player : MonoBehaviour
     {
         private InputActionMap _actionMap;
+        private UnityEvent _onInputTriggered;
 
         public event Action<Player, int> OnInputPressed;
+
+        public event UnityAction OnInputTriggered
+        {
+            add => _onInputTriggered.AddListener(value);
+            remove => _onInputTriggered.RemoveListener(value);
+        }
 
         #region PROPERTIES
         public InputActionMap ActionMap
