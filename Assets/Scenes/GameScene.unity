@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4a7d33fb22e34fb35f0512431e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxScore: {fileID: 11400000, guid: adb6979c606a0c04fbcf9cbf90023d4d, type: 2}
 --- !u!114 &1381483021 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5577349473637551784, guid: aa555ae5758bb574796287d4506cbe2f,
@@ -527,6 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4a7d33fb22e34fb35f0512431e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxScore: {fileID: 11400000, guid: adb6979c606a0c04fbcf9cbf90023d4d, type: 2}
 --- !u!1001 &6388875653835367759
 PrefabInstance:
   m_ObjectHideFlags: 0
