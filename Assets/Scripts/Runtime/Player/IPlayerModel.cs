@@ -10,4 +10,3 @@ namespace Game
         public IReadOnlyReactiveProperty<float> Score { get; }
     }
 }
-

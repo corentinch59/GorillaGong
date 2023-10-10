@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu(menuName = "PlayerBindings")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Player Bindings")]
     public class PlayerBindings : ScriptableObject
     {
         [SerializeField] private string[] _playerBindings = new string[4];

@@ -1,12 +1,13 @@
 ﻿using ScriptableObjectArchitecture;
 using UniRx;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game
 {
     public partial class Player
     {
-        [SerializeField] private FloatVariable _maxScore;
+        [SerializeField, BoxGroup("Configuration")] private FloatVariable _maxScore;
         public IReadOnlyReactiveProperty<float> Score => _score;
         private ReactiveProperty<float> _score = new();
 

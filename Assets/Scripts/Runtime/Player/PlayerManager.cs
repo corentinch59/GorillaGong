@@ -9,37 +9,38 @@ namespace Game
 {
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] private InputActionAsset _actionAsset;
+        [SerializeField, BoxGroup("Dependencies")] private InputActionAsset _actionAsset;
+        [SerializeField, BoxGroup("Dependencies")] private List<PlayerBindings> _keyBindings = new ();
 
-        [SerializeField] private List<Player> m_Players = new ();
-        [SerializeField] private List<PlayerBindings> m_Bindings = new ();
-        [SerializeField] private List<IPlayerModel> m_PlayerModels = new ();
+        [SerializeField, BoxGroup("Bindings")] private PlayerModelList _listToInitialize;
+
+        [SerializeField, BoxGroup("Temporary Dependencies")] private List<Player> _players = new ();
 
         public IReadOnlyList<Player> GetPlayers()
         {
-            return m_Players;
+            return _players;
         }
 
         private void Awake()
         {
-            m_PlayerModels = m_Players.Cast<IPlayerModel>().ToList();
+            _listToInitialize.Players = _players.Cast<IPlayerModel>().ToList();
         }
 
         private void Start()
         {
-            for (int i = 0; i < m_Players.Count; i++)
+            for (int i = 0; i < _players.Count; i++)
             {
                 InputActionMap map = CloneActionMap("Player");
 
-                for (int j = 0; j < m_Bindings[i].GetPlayerBindings.Length; j++)
+                for (int j = 0; j < _keyBindings[i].GetPlayerBindings.Length; j++)
                 {
                     InputBinding binding = map.actions[j].bindings[0];
-                    binding.overridePath = "<Keyboard>/" + m_Bindings[i].GetPlayerBindings[j];
+                    binding.overridePath = "<Keyboard>/" + _keyBindings[i].GetPlayerBindings[j];
                     map.actions[j].ChangeBinding(0).WithPath(binding.overridePath);
                 }
 
 
-                m_Players[i].ActionMap = map;
+                _players[i].ActionMap = map;
             }
         }
 
