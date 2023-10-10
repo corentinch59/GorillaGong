@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,6 +7,8 @@ namespace Game
 {
     public partial class Player : MonoBehaviour, IPlayerModel
     {
+        public int Index { get; set; }
+
         private InputActionMap _actionMap;
         private UnityEvent _onInputTriggered;
 

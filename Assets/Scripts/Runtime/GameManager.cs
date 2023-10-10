@@ -2,6 +2,7 @@
 using Runtime.GameModes;
 using Runtime.GameModes.Config;
 using Runtime.GameModes.Factory;
+using Runtime.PlayerPatterns;
 using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
@@ -11,8 +12,11 @@ namespace Game.Runtime
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private PlayerManager _playerManager;
-        [SerializeField] private GameModeConfigDictionary _gameModeConfigs;
         [SerializeField] private FloatVariable _scoreToReach;
+        
+        [Header("GameModes Dependencies")]
+        [SerializeField] private GameModeConfigDictionary _gameModeConfigs;
+        [SerializeField] private PlayerPatterns _playerPatterns;
         
         [Header("Events")]
         [SerializeField] private PlayerModelGameEvent _gameFinishedEvent;
@@ -23,17 +27,9 @@ namespace Game.Runtime
 
         private void Awake()
         {
-            _gameModeFactory = new GameModeFactory(_playerManager, _gameModeConfigs);
-            _currentGameMode = _gameModeFactory.Create(GameModeType.Simple);
-            _currentGameMode.Start();
+            _gameModeFactory = new GameModeFactory(_playerManager, _gameModeConfigs, _playerPatterns);
 
             _disposables = new CompositeDisposable();
-        }
-
-        private void OnDestroy()
-        {
-            _disposables?.Dispose();
-            _disposables = null;
         }
 
         private void Start()
@@ -44,6 +40,15 @@ namespace Game.Runtime
                 player.Score.Subscribe(score => OnPlayerScoredChanged(player, score))
                 );
             }
+            
+            _currentGameMode = _gameModeFactory.Create(GameModeType.Simple);
+            _currentGameMode.Start();
+        }
+        
+        private void OnDestroy()
+        {
+            _disposables?.Dispose();
+            _disposables = null;
         }
 
         private void OnPlayerScoredChanged(Player player, float score)

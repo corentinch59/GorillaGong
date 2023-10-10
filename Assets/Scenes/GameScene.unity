@@ -472,6 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxScore: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
+  _score:
+    value: 0
 --- !u!114 &1381483021 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5577349473637551784, guid: aa555ae5758bb574796287d4506cbe2f,
@@ -529,6 +531,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxScore: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
+  _score:
+    value: 0
 --- !u!1001 &6388875653835367759
 PrefabInstance:
   m_ObjectHideFlags: 0

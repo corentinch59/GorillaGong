@@ -2,7 +2,6 @@
 using Game;
 using Runtime.GameModes.Config;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Runtime.GameModes
 {
@@ -11,9 +10,9 @@ namespace Runtime.GameModes
         public override IReadOnlyList<int> Patterns => _patterns;
         private List<int> _patterns = new();
 
-        public SimpleGameMode(GameModeConfig gameModeConfig, PlayerManager playerManager) : base(gameModeConfig, playerManager)
+        public SimpleGameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, PlayerPatterns.PlayerPatterns playerPatterns) 
+            : base(gameModeConfig, playerManager, playerPatterns)
         {
-            
         }
 
         protected override void GeneratePatterns()

@@ -24,6 +24,11 @@ namespace Game
         private void Awake()
         {
             _listToInitialize.Players = _players.Cast<IPlayerModel>().ToList();
+
+            for (var i = 0; i < _players.Count; i++)
+            {
+                _players[i].Index = i;
+            }
         }
 
         private void Start()

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game;
 using Runtime.GameModes.Config;
+using UniRx;
 using UnityEngine;
 
 namespace Runtime.GameModes
@@ -9,14 +10,16 @@ namespace Runtime.GameModes
     {
         public abstract IReadOnlyList<int> Patterns { get; }
 
-        protected PlayerManager _playerManager;
-        protected GameModeConfig _config;
+        protected readonly PlayerManager _playerManager;
+        private readonly PlayerPatterns.PlayerPatterns _playerPatterns;
+        protected readonly GameModeConfig _config;
         private Dictionary<Player, int> _playersCurrentIteration = new Dictionary<Player, int>();
 
-        protected GameMode(GameModeConfig gameModeConfig, PlayerManager playerManager)
+        protected GameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, PlayerPatterns.PlayerPatterns playerPatterns)
         {
             _config = gameModeConfig;
             _playerManager = playerManager;
+            _playerPatterns = playerPatterns;
             GeneratePatterns();
         }
 
@@ -25,6 +28,7 @@ namespace Runtime.GameModes
             foreach (Player player in _playerManager.GetPlayers())
             {
                 player.OnInputPressed += OnPlayerInputPressed;
+                _playerPatterns.Values.Add(player.Index, GetCurrentPlayerPattern(player));
             }
         }
 
@@ -38,11 +42,8 @@ namespace Runtime.GameModes
 
         private void OnPlayerInputPressed(Player player, int inputId)
         {
-            _playersCurrentIteration.TryAdd(player, 0);
-            int iterationIndex = _playersCurrentIteration[player];
-            
             // TODO: delegate validation to a "Pattern"
-            bool rightInputPressed = inputId == Patterns[iterationIndex];
+            bool rightInputPressed = inputId == GetCurrentPlayerPattern(player);
             if (rightInputPressed)
             {
                 player.AddScore(_config.ScoreGain);
@@ -57,6 +58,14 @@ namespace Runtime.GameModes
             }
 
             _playersCurrentIteration[player]++;
+            _playerPatterns.Values[player.Index] = GetCurrentPlayerPattern(player);
+        }
+
+        protected int GetCurrentPlayerPattern(Player player)
+        {
+            _playersCurrentIteration.TryAdd(player, 0);
+            int iterationIndex = _playersCurrentIteration[player];
+            return Patterns[iterationIndex];
         }
 
         protected abstract void GeneratePatterns();
