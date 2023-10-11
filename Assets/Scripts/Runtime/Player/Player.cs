@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -8,11 +9,30 @@ namespace Game
     public partial class Player : MonoBehaviour, IPlayerModel
     {
         public int Index { get; set; }
+        [SerializeField] private float _doubleInputToleranceInSeconds = 0.1f;
+        private List<int> _currentInputs = new List<int>();
+        private float _toleranceTimer;
 
         private InputActionMap _actionMap;
         private UnityEvent _onInputTriggered;
 
         public event Action<Player, int[]> OnInputPressed;
+
+        private void Update()
+        {
+            if (_currentInputs.Count == 0)
+            {
+                return;
+            }
+            
+            _toleranceTimer -= Time.deltaTime;
+            if (_toleranceTimer > 0)
+            {
+                return;
+            }
+            
+            SendInputPressedEvent();
+        }
 
         private void OnDisable()
         {
@@ -53,28 +73,27 @@ namespace Game
         }
         #endregion
 
-        public void NotifyULpressed(InputAction.CallbackContext ctx)
+        public void NotifyULpressed(InputAction.CallbackContext ctx) => QueueInput(0);
+        public void NotifyURpressed(InputAction.CallbackContext ctx) => QueueInput(1);
+        public void NotifyBLpressed(InputAction.CallbackContext ctx) => QueueInput(2);
+        public void NotifyBRpressed(InputAction.CallbackContext ctx) => QueueInput(3);
+
+        private void QueueInput(int inputId)
         {
-            Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, new []{0});
+            _currentInputs.Add(inputId);
+
+            if (_currentInputs.Count == 2)
+            {
+                SendInputPressedEvent();
+            }
+            _toleranceTimer = _doubleInputToleranceInSeconds;
         }
 
-        public void NotifyURpressed(InputAction.CallbackContext ctx)
+        private void SendInputPressedEvent()
         {
-            Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, new []{1});
-        }
-
-        public void NotifyBLpressed(InputAction.CallbackContext ctx)
-        {
-            Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, new []{2});
-        }
-
-        public void NotifyBRpressed(InputAction.CallbackContext ctx)
-        {
-            Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, new []{3});
+            OnInputPressed?.Invoke(this, _currentInputs.ToArray());
+            // Debug.Log($"Inputs pressed: {string.Join(", ", _currentInputs)} // {_doubleInputToleranceInSeconds - _toleranceTimer}");
+            _currentInputs.Clear();
         }
     }
 }
