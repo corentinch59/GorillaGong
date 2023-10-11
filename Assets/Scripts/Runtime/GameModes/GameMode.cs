@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Game;
+using Runtime.GameEvents;
 using Runtime.GameModes.Config;
 using Runtime.Patterns;
-using UnityEngine;
 
 namespace Runtime.GameModes
 {
@@ -12,14 +12,20 @@ namespace Runtime.GameModes
 
         protected readonly PlayerManager _playerManager;
         private readonly PlayerPatterns.PlayerPatterns _playerPatterns;
+        private readonly PlayerModelGameEvent _playerSuccessEvent;
+        private readonly PlayerModelGameEvent _playerFailEvent;
         protected readonly GameModeConfig _config;
         private Dictionary<Player, int> _playersCurrentIteration = new Dictionary<Player, int>();
 
-        protected GameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, PlayerPatterns.PlayerPatterns playerPatterns)
+        protected GameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, PlayerPatterns.PlayerPatterns playerPatterns,
+            PlayerModelGameEvent playerSuccessEvent, PlayerModelGameEvent playerFailEvent)
         {
             _config = gameModeConfig;
             _playerManager = playerManager;
             _playerPatterns = playerPatterns;
+            _playerSuccessEvent = playerSuccessEvent;
+            _playerFailEvent = playerFailEvent;
+            
             GeneratePatterns();
         }
 
@@ -40,23 +46,28 @@ namespace Runtime.GameModes
             }
         }
 
-        private void OnPlayerInputPressed(Player player, int[] inputsIds)
+        protected virtual void OnPlayerInputPressed(Player player, int[] inputsIds)
         {
             bool rightInputPressed = GetCurrentPlayerPattern(player).IsInputValid(inputsIds);
             if (rightInputPressed)
             {
                 player.AddScore(_config.ScoreGain);
-                // TODO: trigger SOEvents PlayerSuccess
-                Debug.Log("WIN");
+                _playerSuccessEvent.Raise(player);
             }
             else
             {
                 player.RemoveScore(_config.ScoreLoss);
-                // TODO: trigger SOEvents PlayerFail
-                Debug.Log("LOSS");
+                _playerFailEvent.Raise(player);
             }
 
-            _playersCurrentIteration[player]++;
+            int playerNewCurrentIteration = _playersCurrentIteration[player] + 1;
+            _playersCurrentIteration[player] = playerNewCurrentIteration;
+
+            if (playerNewCurrentIteration >= Patterns.Count)
+            {
+                GeneratePatterns();
+            }
+            
             _playerPatterns.Values[player.Index] = GetCurrentPlayerPattern(player);
         }
 

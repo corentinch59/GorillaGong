@@ -1,21 +1,22 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Game;
+using Runtime.GameEvents;
 using Runtime.GameModes.Config;
+using UnityEngine;
 
 namespace Runtime.GameModes.Factory
 {
-    public class GameModeFactory : IGameModeFactory
+    public class GameModeFactory : MonoBehaviour, IGameModeFactory
     {
-        private readonly GameModeConfigDictionary _gameModeConfigs;
-        private readonly PlayerPatterns.PlayerPatterns _playerPatterns;
-        private readonly PlayerManager _playerManager;
+        [SerializeField] private GameModeConfigDictionary _gameModeConfigs;
+        [SerializeField] private PlayerPatterns.PlayerPatterns _playerPatterns;
+        [SerializeField] private PlayerModelGameEvent _playerSuccessEvent;
+        [SerializeField] private PlayerModelGameEvent _playerFailEvent;
+        [SerializeField] private PlayerManager _playerManager;
 
-        public GameModeFactory(PlayerManager playerManager, GameModeConfigDictionary gameModeConfigs, PlayerPatterns.PlayerPatterns playerPatterns)
+        private void Awake()
         {
-            _playerManager = playerManager;
-            _gameModeConfigs = gameModeConfigs;
-            _playerPatterns = playerPatterns;
+            _playerPatterns.ResetValues();
         }
 
         public IGameMode Create(GameModeType type)
@@ -23,7 +24,7 @@ namespace Runtime.GameModes.Factory
             GameModeConfig gameModeConfig = GetGameModeConfig(type);
             return type switch
             {
-                GameModeType.Simple => new SimpleGameMode(gameModeConfig, _playerManager, _playerPatterns),
+                GameModeType.Simple => new SimpleGameMode(gameModeConfig, _playerManager, _playerPatterns, _playerSuccessEvent, _playerFailEvent),
                 _ => throw new InvalidEnumArgumentException()
             };
         }

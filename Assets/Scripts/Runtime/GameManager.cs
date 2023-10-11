@@ -1,8 +1,6 @@
 ﻿using Runtime.GameEvents;
 using Runtime.GameModes;
-using Runtime.GameModes.Config;
 using Runtime.GameModes.Factory;
-using Runtime.PlayerPatterns;
 using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
@@ -14,22 +12,15 @@ namespace Game.Runtime
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private FloatVariable _scoreToReach;
         
-        [Header("GameModes Dependencies")]
-        [SerializeField] private GameModeConfigDictionary _gameModeConfigs;
-        [SerializeField] private PlayerPatterns _playerPatterns;
-        
         [Header("Events")]
         [SerializeField] private PlayerModelGameEvent _gameFinishedEvent;
+        [SerializeField] GameModeFactory _gameModeFactory;
 
-        private IGameModeFactory _gameModeFactory;
         private IGameMode _currentGameMode;
         private CompositeDisposable _disposables;
 
         private void Awake()
         {
-            _gameModeFactory = new GameModeFactory(_playerManager, _gameModeConfigs, _playerPatterns);
-            _playerPatterns.ResetValues();
-
             _disposables = new CompositeDisposable();
         }
 

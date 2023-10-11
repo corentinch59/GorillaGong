@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game;
+using Runtime.GameEvents;
 using Runtime.GameModes.Config;
 using Runtime.Patterns;
 using UnityEngine;
@@ -11,8 +12,10 @@ namespace Runtime.GameModes
         public override IReadOnlyList<Pattern> Patterns => _patterns;
         private List<Pattern> _patterns = new();
 
-        public SimpleGameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, PlayerPatterns.PlayerPatterns playerPatterns) 
-            : base(gameModeConfig, playerManager, playerPatterns)
+        public SimpleGameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, 
+            PlayerPatterns.PlayerPatterns playerPatterns, PlayerModelGameEvent playerSuccessEvent, 
+            PlayerModelGameEvent playerFailEvent) 
+            : base(gameModeConfig, playerManager, playerPatterns, playerSuccessEvent, playerFailEvent)
         {
         }
 
