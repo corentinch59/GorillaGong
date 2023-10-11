@@ -11,8 +11,8 @@ Shader "Unlit/ScoreBar"
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" } // Convert this to Opaque
-        Blend SrcAlpha OneMinusSrcAlpha // Delete this line
+        Tags { "RenderType"="Opaque" } // Convert this to Opaque or Transparent
+        // Blend SrcAlpha OneMinusSrcAlpha // Delete this line
 
         Pass
         {
@@ -64,7 +64,7 @@ Shader "Unlit/ScoreBar"
                 }
                 
                 float3 outColor = lerp(bgColor, scoreColor, scoreMask);
-                return float4(outColor, scoreMask); // instead of scoreMask, make it 0
+                return float4(outColor, 0); // instead of scoreMask, make it 0
             }
             ENDCG
         }

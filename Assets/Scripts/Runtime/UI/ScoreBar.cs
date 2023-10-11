@@ -20,7 +20,6 @@ namespace Game
             _scoreMaterial = Instantiate(_scoreMaterial);
             _image.material = _scoreMaterial;
             _scoreMaterial.SetFloat("_Player", _nbInstances);
-            transform.position += new Vector3(0.0f, 100.0f * _nbInstances, 0.0f);
             player.Score.Subscribe(UpdateScoreBar);
             _nbInstances++;
         }
