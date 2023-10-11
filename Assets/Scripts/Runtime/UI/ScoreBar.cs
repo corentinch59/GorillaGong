@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
@@ -15,12 +16,20 @@ namespace Game
         [SerializeField] private Material _scoreMaterial;
         [SerializeField] private FloatVariable _maxScore;
 
+        private IDisposable _disposable;
+
+        private void OnDisable()
+        {
+            _disposable?.Dispose();
+            _disposable = null;
+        }
+
         public override void Deploy(IPlayerModel player)
         {
             _scoreMaterial = Instantiate(_scoreMaterial);
             _image.material = _scoreMaterial;
-            _scoreMaterial.SetFloat("_Player", _nbInstances);
-            player.Score.Subscribe(UpdateScoreBar);
+            _scoreMaterial.SetFloat("_Player", _nbInstances); 
+            _disposable = player.Score.Subscribe(UpdateScoreBar);
             _nbInstances++;
         }
 

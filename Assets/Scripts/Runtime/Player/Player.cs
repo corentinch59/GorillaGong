@@ -14,6 +14,19 @@ namespace Game
 
         public event Action<Player, int[]> OnInputPressed;
 
+        private void OnDisable()
+        {
+            if (ActionMap == null)
+            {
+                return;
+            }
+            
+            _actionMap.actions[0].started -= NotifyULpressed;
+            _actionMap.actions[1].started -= NotifyURpressed;
+            _actionMap.actions[2].started -= NotifyBLpressed;
+            _actionMap.actions[3].started -= NotifyBRpressed;
+        }
+
         public event UnityAction OnInputTriggered
         {
             add => _onInputTriggered.AddListener(value);

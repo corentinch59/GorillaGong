@@ -23,6 +23,7 @@ namespace Game
 
         private void Awake()
         {
+            _listToInitialize.ResetValues();
             _listToInitialize.Players = _players.Cast<IPlayerModel>().ToList();
 
             for (var i = 0; i < _players.Count; i++)

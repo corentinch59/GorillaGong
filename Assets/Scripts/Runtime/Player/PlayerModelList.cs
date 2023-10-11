@@ -16,5 +16,15 @@ namespace Game
         public PlayerModelList(IEnumerable<IPlayerModel> players) : base(players)
         {
         }
+
+        public void ResetValues()
+        {
+            if (_players is null)
+            {
+                return;
+            }
+            
+            _players.Clear();
+        }
     }
 }

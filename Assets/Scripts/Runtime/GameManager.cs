@@ -28,6 +28,7 @@ namespace Game.Runtime
         private void Awake()
         {
             _gameModeFactory = new GameModeFactory(_playerManager, _gameModeConfigs, _playerPatterns);
+            _playerPatterns.ResetValues();
 
             _disposables = new CompositeDisposable();
         }

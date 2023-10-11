@@ -541,6 +541,48 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _previouslyRegisteredEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 33632dc6e06f3da469926284c71d7bd6,
+        type: 2}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: bc15f8fc13552584db783ade046237c0,
+        type: 2}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ResetValues
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Game.PlayerModelList, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117042732137142414, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
+        type: 3}
+      propertyPath: _response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1640668742643407309, guid: 1da51e06a3ddb9343988072fdfd9bfa7,
         type: 3}
       propertyPath: m_LocalPosition.x

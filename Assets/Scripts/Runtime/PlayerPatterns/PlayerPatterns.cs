@@ -13,6 +13,11 @@ namespace Runtime.PlayerPatterns
         public override IReadOnlyReactiveDictionary<int, Pattern> Patterns => _patterns;
         public ReactiveDictionary<int, Pattern> Values => _patterns;
 
-        private readonly ReactiveDictionary<int, Pattern> _patterns = new();
+        private ReactiveDictionary<int, Pattern> _patterns = new();
+
+        public void ResetValues()
+        {
+            _patterns.Clear();
+        }
     }
 }
