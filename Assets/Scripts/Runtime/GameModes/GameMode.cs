@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using Game;
 using Runtime.GameModes.Config;
-using UniRx;
+using Runtime.Patterns;
 using UnityEngine;
 
 namespace Runtime.GameModes
 {
     public abstract class GameMode : IGameMode
     {
-        public abstract IReadOnlyList<int> Patterns { get; }
+        public abstract IReadOnlyList<Pattern> Patterns { get; }
 
         protected readonly PlayerManager _playerManager;
         private readonly PlayerPatterns.PlayerPatterns _playerPatterns;
@@ -40,10 +40,9 @@ namespace Runtime.GameModes
             }
         }
 
-        private void OnPlayerInputPressed(Player player, int inputId)
+        private void OnPlayerInputPressed(Player player, int[] inputsIds)
         {
-            // TODO: delegate validation to a "Pattern"
-            bool rightInputPressed = inputId == GetCurrentPlayerPattern(player);
+            bool rightInputPressed = GetCurrentPlayerPattern(player).IsInputValid(inputsIds);
             if (rightInputPressed)
             {
                 player.AddScore(_config.ScoreGain);
@@ -61,7 +60,7 @@ namespace Runtime.GameModes
             _playerPatterns.Values[player.Index] = GetCurrentPlayerPattern(player);
         }
 
-        protected int GetCurrentPlayerPattern(Player player)
+        protected Pattern GetCurrentPlayerPattern(Player player)
         {
             _playersCurrentIteration.TryAdd(player, 0);
             int iterationIndex = _playersCurrentIteration[player];

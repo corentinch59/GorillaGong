@@ -1,4 +1,5 @@
 ﻿using System;
+using Runtime.Patterns;
 using Runtime.PlayerPatterns;
 using UnityEngine;
 using UniRx;
@@ -33,17 +34,38 @@ namespace Game.ZonesPatcher
             _disposables = null;
         }
 
-        private void OnPlayerPatternCreated(DictionaryAddEvent<int, int> obj) => OnPlayerPatternReplaced(obj.Key, 0, obj.Value);
-        private void OnPlayerPatternReplaced(DictionaryReplaceEvent<int, int> obj) => OnPlayerPatternReplaced(obj.Key, obj.OldValue, obj.NewValue);
-        private void OnPlayerPatternReplaced(int key, int oldValue, int newValue)
+        private void OnPlayerPatternCreated(DictionaryAddEvent<int, Pattern> obj) => OnPlayerPatternReplaced(obj.Key, null, obj.Value);
+        private void OnPlayerPatternReplaced(DictionaryReplaceEvent<int, Pattern> obj) => OnPlayerPatternReplaced(obj.Key, obj.OldValue, obj.NewValue);
+        private void OnPlayerPatternReplaced(int key, Pattern oldValue, Pattern newValue)
         {
             if (key != _playerIndex)
             {
                 return;
             }
 
-            _images[oldValue].color = Color.white;
-            _images[newValue].color = Color.green;
+            if (newValue is null)
+            {
+                foreach (Image image in _images)
+                {
+                    image.color = Color.white;
+                }
+
+                return;
+            }
+            
+            
+            if (oldValue is not null)
+            {
+                foreach (int old in oldValue.Values)
+                {
+                    _images[old].color = Color.white;
+                }
+            }
+
+            foreach (int newValueValue in newValue.Values)
+            {
+                _images[newValueValue].color = Color.green;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Game
         private InputActionMap _actionMap;
         private UnityEvent _onInputTriggered;
 
-        public event Action<Player, int> OnInputPressed;
+        public event Action<Player, int[]> OnInputPressed;
 
         public event UnityAction OnInputTriggered
         {
@@ -43,25 +43,25 @@ namespace Game
         public void NotifyULpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, 0);
+            OnInputPressed?.Invoke(this, new []{0});
         }
 
         public void NotifyURpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, 1);
+            OnInputPressed?.Invoke(this, new []{1});
         }
 
         public void NotifyBLpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, 2);
+            OnInputPressed?.Invoke(this, new []{2});
         }
 
         public void NotifyBRpressed(InputAction.CallbackContext ctx)
         {
             Debug.Log(name + " : " + ctx.action);
-            OnInputPressed?.Invoke(this, 3);
+            OnInputPressed?.Invoke(this, new []{3});
         }
     }
 }
