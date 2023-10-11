@@ -7,6 +7,7 @@ namespace Runtime.GameModes
     {
         public IReadOnlyList<Pattern> Patterns { get; }
         public void Start();
+        public void Update(float deltaTime);
         public void Stop();
     }
 }

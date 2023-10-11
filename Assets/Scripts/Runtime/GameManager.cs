@@ -1,4 +1,5 @@
-﻿using Runtime.GameEvents;
+﻿using System;
+using Runtime.GameEvents;
 using Runtime.GameModes;
 using Runtime.GameModes.Factory;
 using ScriptableObjectArchitecture;
@@ -36,7 +37,17 @@ namespace Game.Runtime
             _currentGameMode = _gameModeFactory.Create(GameModeType.Simple);
             _currentGameMode.Start();
         }
-        
+
+        private void Update()
+        {
+            if (_currentGameMode == null)
+            {
+                return;
+            }
+            
+            _currentGameMode.Update(Time.deltaTime);
+        }
+
         private void OnDestroy()
         {
             _disposables?.Dispose();

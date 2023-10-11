@@ -20,6 +20,7 @@ namespace Game
         {
             return _players;
         }
+        public int PlayersCount() => _players.Count;
 
         private void Awake()
         {

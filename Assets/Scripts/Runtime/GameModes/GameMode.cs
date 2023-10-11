@@ -15,7 +15,8 @@ namespace Runtime.GameModes
         private readonly PlayerModelGameEvent _playerSuccessEvent;
         private readonly PlayerModelGameEvent _playerFailEvent;
         protected readonly GameModeConfig _config;
-        private Dictionary<Player, int> _playersCurrentIteration = new Dictionary<Player, int>();
+        private int[] _playersCurrentIteration;
+        private float[] _playersDeathTimer;
 
         protected GameMode(GameModeConfig gameModeConfig, PlayerManager playerManager, PlayerPatterns.PlayerPatterns playerPatterns,
             PlayerModelGameEvent playerSuccessEvent, PlayerModelGameEvent playerFailEvent)
@@ -25,6 +26,14 @@ namespace Runtime.GameModes
             _playerPatterns = playerPatterns;
             _playerSuccessEvent = playerSuccessEvent;
             _playerFailEvent = playerFailEvent;
+
+            int playersCount = _playerManager.PlayersCount();
+            _playersCurrentIteration = new int[playersCount];
+            _playersDeathTimer = new float[playersCount];
+            for (int i = 0; i < playersCount; i++)
+            {
+                _playersDeathTimer[i] = _config.DeathTime;
+            }
             
             GeneratePatterns();
         }
@@ -35,6 +44,18 @@ namespace Runtime.GameModes
             {
                 player.OnInputPressed += OnPlayerInputPressed;
                 _playerPatterns.Values.Add(player.Index, GetCurrentPlayerPattern(player));
+            }
+        }
+
+        public virtual void Update(float deltaTime)
+        {
+            for (int i = 0; i < _playersDeathTimer.Length; i++)
+            {
+                _playersDeathTimer[i] -= deltaTime;
+                if (_playersDeathTimer[i] <= 0)
+                {
+                    OnPlayerFailed(_playerManager.GetPlayers()[i]);
+                }
             }
         }
 
@@ -51,30 +72,46 @@ namespace Runtime.GameModes
             bool rightInputPressed = GetCurrentPlayerPattern(player).IsInputValid(inputsIds);
             if (rightInputPressed)
             {
-                player.AddScore(_config.ScoreGain);
-                _playerSuccessEvent.Raise(player);
+                OnPlayerSuccess(player);
             }
             else
             {
-                player.RemoveScore(_config.ScoreLoss);
-                _playerFailEvent.Raise(player);
+                OnPlayerFailed(player);
             }
+        }
 
-            int playerNewCurrentIteration = _playersCurrentIteration[player] + 1;
-            _playersCurrentIteration[player] = playerNewCurrentIteration;
+        private void OnPlayerSuccess(Player player)
+        {
+            player.AddScore(_config.ScoreGain);
+            _playerSuccessEvent.Raise(player);
+            
+            GoToNextIteration(player);
+        }
 
-            if (playerNewCurrentIteration >= Patterns.Count)
+        private void OnPlayerFailed(Player player)
+        {
+            player.RemoveScore(_config.ScoreLoss);
+            _playerFailEvent.Raise(player);
+            
+            GoToNextIteration(player);
+        }
+        
+        private void GoToNextIteration(Player player)
+        {
+            _playersDeathTimer[player.Index] = _config.DeathTime;
+            
+            _playersCurrentIteration[player.Index]++;
+            if (_playersCurrentIteration[player.Index] >= Patterns.Count)
             {
                 GeneratePatterns();
             }
-            
+
             _playerPatterns.Values[player.Index] = GetCurrentPlayerPattern(player);
         }
 
         protected Pattern GetCurrentPlayerPattern(Player player)
         {
-            _playersCurrentIteration.TryAdd(player, 0);
-            int iterationIndex = _playersCurrentIteration[player];
+            int iterationIndex = _playersCurrentIteration[player.Index];
             return Patterns[iterationIndex];
         }
 

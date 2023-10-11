@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ScoreGain>k__BackingField: 10
   <ScoreLoss>k__BackingField: 5
+  <DeathTime>k__BackingField: 2

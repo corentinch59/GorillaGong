@@ -10,5 +10,8 @@ namespace Runtime.GameModes.Config
         
         [field: SerializeField] 
         public int ScoreLoss { get; private set; }
+        
+        [field: SerializeField]
+        public int DeathTime { get; private set; }
     }
 }
