@@ -30,6 +30,8 @@ namespace Runtime.GameModes.SpamGameMode
             base.Start();
         }
 
+        // Overriding cause we don't want to decrease player score or call failed event
+        protected override void OnPlayerFailed(Player player) { }
         protected override void OnPlayerSuccess(Player player)
         {
             _playersInputsCount[player.Index]++;
@@ -54,7 +56,6 @@ namespace Runtime.GameModes.SpamGameMode
             {
                 return;
             }
-
             
             IEnumerable<int> winnersIndex = _playersInputsCount.Select((value, index) => (value, index))
                 .Where(tuple => tuple.value == _playersInputsCount.Max())
