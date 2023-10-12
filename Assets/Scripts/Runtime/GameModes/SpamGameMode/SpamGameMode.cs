@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Game;
-using Runtime.GameModes.Config;
-using Runtime.Patterns;
+using GorillaGong.Runtime.GameModes.Config;
+using GorillaGong.Runtime.Patterns;
 
-namespace Runtime.GameModes.SpamGameMode
+namespace GorillaGong.Runtime.GameModes.SpamGameMode
 {
     public class SpamGameMode : GameMode<SpamGameModeConfig>
     {
@@ -31,14 +30,14 @@ namespace Runtime.GameModes.SpamGameMode
         }
 
         // Overriding cause we don't want to decrease player score or call failed event
-        protected override void OnPlayerFailed(Player player) { }
-        protected override void OnPlayerSuccess(Player player)
+        protected override void OnPlayerFailed(Player.Player player) { }
+        protected override void OnPlayerSuccess(Player.Player player)
         {
             _playersInputsCount[player.Index]++;
             PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
         }
 
-        public override Pattern GetPlayerCurrentPattern(Player player)
+        public override Pattern GetPlayerCurrentPattern(Player.Player player)
         {
             int inputValue = (_playersInputsCount[player.Index] + _offset) % 2;
             return new Pattern(new[] { inputValue });
@@ -60,10 +59,10 @@ namespace Runtime.GameModes.SpamGameMode
             IEnumerable<int> winnersIndex = _playersInputsCount.Select((value, index) => (value, index))
                 .Where(tuple => tuple.value == _playersInputsCount.Max())
                 .Select(tuple => tuple.index);
-            IReadOnlyList<Player> players = PlayerManager.GetPlayers(); 
+            IReadOnlyList<Player.Player> players = PlayerManager.GetPlayers(); 
             foreach (int winnerIndex in winnersIndex)
             {
-                Player player = players[winnerIndex];
+                Player.Player player = players[winnerIndex];
                 player.AddScore(Config.ScoreGain);
                 Config.GameModeStoppedEvent.Raise(player);
             }

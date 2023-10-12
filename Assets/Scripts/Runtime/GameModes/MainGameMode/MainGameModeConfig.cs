@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GorillaGong.Runtime.GameModes.Config;
+using UnityEngine;
 
-namespace Runtime.GameModes.Config
+namespace GorillaGong.Runtime.GameModes.MainGameMode
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/GameModes/Config/Main")]
     public class MainGameModeConfig : GameModeConfig

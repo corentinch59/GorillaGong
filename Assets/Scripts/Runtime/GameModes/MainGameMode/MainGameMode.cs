@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using Game;
-using Runtime.GameEvents;
-using Runtime.GameModes.Config;
-using Runtime.Patterns;
+using GorillaGong.Runtime.GameModes.Config;
+using GorillaGong.Runtime.Patterns;
 using UnityEngine;
 
-namespace Runtime.GameModes.MainGameMode
+namespace GorillaGong.Runtime.GameModes.MainGameMode
 {
     public class MainGameMode : GameMode<MainGameModeConfig>
     {
@@ -45,19 +43,19 @@ namespace Runtime.GameModes.MainGameMode
             }
         }
 
-        protected override void OnPlayerFailed(Player player)
+        protected override void OnPlayerFailed(Player.Player player)
         {
             base.OnPlayerFailed(player);
             GoToNextIteration(player);
         }
         
-        protected override void OnPlayerSuccess(Player player)
+        protected override void OnPlayerSuccess(Player.Player player)
         {
             base.OnPlayerSuccess(player);
             GoToNextIteration(player);
         }
 
-        private void GoToNextIteration(Player player)
+        private void GoToNextIteration(Player.Player player)
         {
             ResetPlayerDeathTimer(player);
             
@@ -70,7 +68,7 @@ namespace Runtime.GameModes.MainGameMode
             PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
         }
         
-        public override Pattern GetPlayerCurrentPattern(Player player)
+        public override Pattern GetPlayerCurrentPattern(Player.Player player)
         {
             int iterationIndex = _playersCurrentIteration[player.Index];
             return _patterns[iterationIndex];
@@ -113,7 +111,7 @@ namespace Runtime.GameModes.MainGameMode
             }
         }
 
-        private void ResetPlayerDeathTimer(Player player)
+        private void ResetPlayerDeathTimer(Player.Player player)
         {
             _playersDeathTimer[player.Index] = Config.DeathTime;
         }

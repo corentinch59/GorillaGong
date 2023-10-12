@@ -1,10 +1,9 @@
-﻿using System;
-using Runtime.GameEvents;
-using Runtime.GameModes.Config;
+﻿using GorillaGong.Runtime.GameEvents;
+using GorillaGong.Runtime.GameModes.Config;
 using ScriptableObjectArchitecture;
 using UnityEngine;
 
-namespace Runtime.GameModes
+namespace GorillaGong.Runtime.GameModes
 {
     public class GameModesManager : MonoBehaviour
     {

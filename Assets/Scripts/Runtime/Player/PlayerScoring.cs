@@ -1,9 +1,9 @@
-﻿using ScriptableObjectArchitecture;
+﻿using NaughtyAttributes;
+using ScriptableObjectArchitecture;
 using UniRx;
-using NaughtyAttributes;
 using UnityEngine;
 
-namespace Game
+namespace GorillaGong.Runtime.Player
 {
     public partial class Player
     {

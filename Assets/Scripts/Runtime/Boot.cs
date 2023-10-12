@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Runtime
+namespace GorillaGong.Runtime
 {
     // TODO: ASYNC stuff not pretty here
     public class Boot : MonoBehaviour

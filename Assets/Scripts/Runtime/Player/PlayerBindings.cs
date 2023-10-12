@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 
-namespace Game
+namespace GorillaGong.Runtime.Player
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/Player Bindings")]
     public class PlayerBindings : ScriptableObject

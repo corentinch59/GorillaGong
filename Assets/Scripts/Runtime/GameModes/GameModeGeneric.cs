@@ -1,7 +1,6 @@
-﻿using Game;
-using Runtime.GameModes.Config;
+﻿using GorillaGong.Runtime.GameModes.Config;
 
-namespace Runtime.GameModes
+namespace GorillaGong.Runtime.GameModes
 {
     public abstract class GameMode<T> : GameMode where T : GameModeConfig
     {
@@ -14,7 +13,7 @@ namespace Runtime.GameModes
         
         public override void Start()
         {
-            foreach (Player player in PlayerManager.GetPlayers())
+            foreach (Player.Player player in PlayerManager.GetPlayers())
             {
                 player.OnInputPressed += OnPlayerInputPressed;
                 PlayerPatterns.Values.Add(player.Index, GetPlayerCurrentPattern(player));
@@ -25,13 +24,13 @@ namespace Runtime.GameModes
 
         public override void Stop()
         {
-            foreach (Player player in PlayerManager.GetPlayers())
+            foreach (Player.Player player in PlayerManager.GetPlayers())
             {
                 player.OnInputPressed -= OnPlayerInputPressed;
             }
         }
 
-        protected virtual void OnPlayerInputPressed(Player player, int[] inputsIds)
+        protected virtual void OnPlayerInputPressed(Player.Player player, int[] inputsIds)
         {
             bool rightInputPressed = GetPlayerCurrentPattern(player).IsInputValid(inputsIds);
             if (rightInputPressed)
@@ -44,13 +43,13 @@ namespace Runtime.GameModes
             }
         }
 
-        protected virtual void OnPlayerSuccess(Player player)
+        protected virtual void OnPlayerSuccess(Player.Player player)
         {
             player.AddScore(Config.ScoreGain);
             PlayerSuccessEvent.Raise(player);
         }
 
-        protected virtual void OnPlayerFailed(Player player)
+        protected virtual void OnPlayerFailed(Player.Player player)
         {
             player.RemoveScore(Config.ScoreLoss);
             PlayerFailEvent.Raise(player);

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Game
+namespace GorillaGong.Runtime.Player
 {
     public partial class Player : MonoBehaviour, IPlayerModel
     {

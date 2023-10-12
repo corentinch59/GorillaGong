@@ -1,6 +1,6 @@
-﻿using Runtime.GameModes.Config;
+﻿using GorillaGong.Runtime.GameModes.Config;
 
-namespace Runtime.GameModes.Factory
+namespace GorillaGong.Runtime.GameModes.Factory
 {
     public interface IGameModeFactory
     {

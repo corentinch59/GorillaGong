@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Runtime
+namespace GorillaGong.Runtime
 {
     public class VariableListener<T> : MonoBehaviour
     {

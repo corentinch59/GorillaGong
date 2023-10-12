@@ -1,11 +1,10 @@
-﻿using System;
-using Runtime.Patterns;
-using Runtime.PlayerPatterns;
-using UnityEngine;
+﻿using GorillaGong.Runtime.Patterns;
+using GorillaGong.Runtime.PlayerPatterns;
 using UniRx;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.ZonesPatcher
+namespace GorillaGong.Runtime.UI.ZonesPatcher
 {
     //TODO: this class should be instantiated at runtime and patched instead of being in the scene with SerializeField
     public class ZonesPatcher : MonoBehaviour

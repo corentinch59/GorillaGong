@@ -1,4 +1,4 @@
-﻿namespace Runtime
+﻿namespace GorillaGong.Runtime.GameStates
 {
     public enum GameState
     {

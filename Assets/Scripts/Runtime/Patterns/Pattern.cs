@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Runtime.Patterns
+namespace GorillaGong.Runtime.Patterns
 {
     public class Pattern
     {

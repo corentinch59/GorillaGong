@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using GorillaGong.Runtime.Player;
 using UnityEngine;
 
-namespace Game
+namespace GorillaGong.Runtime.UI
 {
     public abstract class PlayerElement : MonoBehaviour
     {

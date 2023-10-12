@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using GorillaGong.Runtime.Player;
+using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
-using ScriptableObjectArchitecture;
 using UnityEngine.UI;
 
-namespace Game
+namespace GorillaGong.Runtime.UI
 {
     public class ScoreBar : PlayerElement
     {

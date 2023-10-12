@@ -1,8 +1,8 @@
-﻿using Runtime.GameEvents;
+﻿using GorillaGong.Runtime.GameEvents;
 using ScriptableObjectArchitecture;
 using UnityEngine;
 
-namespace Runtime.GameModes.Config
+namespace GorillaGong.Runtime.GameModes.Config
 {
     public abstract class GameModeConfig : ScriptableObject
     {

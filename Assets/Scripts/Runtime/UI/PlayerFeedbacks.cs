@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Runtime.GameEvents;
+using GorillaGong.Runtime.GameEvents;
+using GorillaGong.Runtime.Player;
 using UnityEngine;
 
-namespace Game
+namespace GorillaGong.Runtime.UI
 {
     public class PlayerFeedbacks : MonoBehaviour
     {

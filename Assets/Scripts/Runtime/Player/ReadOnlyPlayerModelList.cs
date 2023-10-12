@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Game;
 using UnityEngine;
 
-namespace Game
+namespace GorillaGong.Runtime.Player
 {
     public abstract class ReadOnlyPlayerModelList : ScriptableObject, IEnumerable<IPlayerModel>
     {

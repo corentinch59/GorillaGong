@@ -1,4 +1,4 @@
-﻿namespace Runtime.GameModes
+﻿namespace GorillaGong.Runtime.GameModes
 {
     public enum GameModeType
     {

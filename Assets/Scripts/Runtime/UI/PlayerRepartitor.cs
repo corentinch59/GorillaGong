@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using GorillaGong.Runtime.Player;
 using NaughtyAttributes;
-using UniRx;
 using UnityEngine;
-using UnityEngine.Assertions;
 
-namespace Game
+namespace GorillaGong.Runtime.UI
 {
     public class PlayerRepartitor : MonoBehaviour
     {

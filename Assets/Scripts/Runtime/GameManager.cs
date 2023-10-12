@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
-using Runtime;
-using Runtime.GameEvents;
-using Runtime.GameModes;
-using Runtime.GameModes.Factory;
-using Runtime.GameStates;
+using GorillaGong.Runtime.GameEvents;
+using GorillaGong.Runtime.GameModes;
+using GorillaGong.Runtime.GameModes.Factory;
+using GorillaGong.Runtime.GameStates;
+using GorillaGong.Runtime.Player;
 using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
 
-namespace Game.Runtime
+namespace GorillaGong.Runtime
 {
     public class GameManager : MonoBehaviour
     {
@@ -41,7 +41,7 @@ namespace Game.Runtime
 
         private IEnumerator Start()
         {
-            foreach (Player player in _playerManager.GetPlayers())
+            foreach (Player.Player player in _playerManager.GetPlayers())
             {
                 _disposables.Add(
                 player.Score.Subscribe(score => OnPlayerScoredChanged(player, score))
@@ -93,7 +93,7 @@ namespace Game.Runtime
             _disposables = null;
         }
 
-        private void OnPlayerScoredChanged(Player player, float score)
+        private void OnPlayerScoredChanged(Player.Player player, float score)
         {
             if (score < _scoreToReach)
             {
@@ -103,7 +103,7 @@ namespace Game.Runtime
             OnGameFinished(player);
         }
 
-        private void OnGameFinished(Player winningPlayer)
+        private void OnGameFinished(Player.Player winningPlayer)
         {
             _disposables?.Dispose();
             _disposables = null;

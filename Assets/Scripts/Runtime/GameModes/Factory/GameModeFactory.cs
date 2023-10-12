@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
-using Game;
-using Runtime.GameEvents;
-using Runtime.GameModes.Config;
+using GorillaGong.Runtime.GameEvents;
+using GorillaGong.Runtime.GameModes.Config;
+using GorillaGong.Runtime.Player;
 using UnityEngine;
 
-namespace Runtime.GameModes.Factory
+namespace GorillaGong.Runtime.GameModes.Factory
 {
     public class GameModeFactory : MonoBehaviour, IGameModeFactory
     {

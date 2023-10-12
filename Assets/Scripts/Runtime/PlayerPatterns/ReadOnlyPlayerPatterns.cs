@@ -1,8 +1,8 @@
-﻿using Runtime.Patterns;
+﻿using GorillaGong.Runtime.Patterns;
 using UniRx;
 using UnityEngine;
 
-namespace Runtime.PlayerPatterns
+namespace GorillaGong.Runtime.PlayerPatterns
 {
     public abstract class ReadOnlyPlayerPatterns : ScriptableObject
     {

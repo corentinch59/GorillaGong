@@ -2,7 +2,7 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-namespace Runtime.GameModes.Config
+namespace GorillaGong.Runtime.GameModes.Config
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/GameModes/GameModeConfig Dictionary", order = 0)]
     public class GameModeConfigDictionary : ScriptableObject

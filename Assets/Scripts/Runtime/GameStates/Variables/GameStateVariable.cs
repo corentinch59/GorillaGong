@@ -2,7 +2,7 @@ using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Runtime.GameStates
+namespace GorillaGong.Runtime.GameStates
 {
 	[CreateAssetMenu(
 	    fileName = "GameStateVariable.asset",

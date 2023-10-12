@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Game;
-using Runtime.GameEvents;
-using Runtime.Patterns;
+﻿using GorillaGong.Runtime.GameEvents;
+using GorillaGong.Runtime.Patterns;
+using GorillaGong.Runtime.Player;
 
-namespace Runtime.GameModes
+namespace GorillaGong.Runtime.GameModes
 {
     public abstract class GameMode : IGameMode
     {
@@ -13,7 +12,7 @@ namespace Runtime.GameModes
         protected PlayerModelGameEvent PlayerFailEvent {get; private set;}
 
         public abstract bool IsFinished { get; }
-        public abstract Pattern GetPlayerCurrentPattern(Player player);
+        public abstract Pattern GetPlayerCurrentPattern(Player.Player player);
         public abstract void Start();
         public abstract void Update(float deltaTime);
         public abstract void Stop();
