@@ -1,5 +1,4 @@
-﻿using System;
-using MoreMountains.FeedbacksForThirdParty;
+﻿using System.Collections;
 using Runtime.GameEvents;
 using Runtime.GameModes;
 using Runtime.GameModes.Factory;
@@ -11,13 +10,19 @@ namespace Game.Runtime
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private PlayerManager _playerManager;
+        [Header("Params")]
+        [SerializeField] private FloatVariable _gameStartDelayInSeconds;
         [SerializeField] private FloatVariable _scoreToReach;
         
-        [Header("Events")]
-        [SerializeField] private PlayerModelGameEvent _gameFinishedEvent;
+        [Header("Dependencies")]
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] GameModeFactory _gameModeFactory;
 
+        [Header("Events")] 
+        [SerializeField] private GameEvent _gameStartRequestedEvent;
+        [SerializeField] private GameEvent _gameStartedEvent;
+        [SerializeField] private PlayerModelGameEvent _gameFinishedEvent;
+        
         private IGameMode _currentGameMode;
         private bool _isGameFinished;
         private CompositeDisposable _disposables;
@@ -27,7 +32,7 @@ namespace Game.Runtime
             _disposables = new CompositeDisposable();
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
             foreach (Player player in _playerManager.GetPlayers())
             {
@@ -35,9 +40,19 @@ namespace Game.Runtime
                 player.Score.Subscribe(score => OnPlayerScoredChanged(player, score))
                 );
             }
+
+            // _gameStartRequestedEvent.AddListener(StartGame); For later
+            yield return new WaitForSeconds(_gameStartDelayInSeconds.Value);
             
+            StartGame();
+        }
+
+        private void StartGame()
+        {
             _currentGameMode = _gameModeFactory.Create(GameModeType.Main);
             _currentGameMode.Start();
+            
+            _gameStartedEvent.Raise();
         }
 
         private void Update()
