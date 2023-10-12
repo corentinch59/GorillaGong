@@ -1,4 +1,5 @@
 ﻿using System;
+using MoreMountains.FeedbacksForThirdParty;
 using Runtime.GameEvents;
 using Runtime.GameModes;
 using Runtime.GameModes.Factory;
@@ -18,6 +19,7 @@ namespace Game.Runtime
         [SerializeField] GameModeFactory _gameModeFactory;
 
         private IGameMode _currentGameMode;
+        private bool _isGameFinished;
         private CompositeDisposable _disposables;
 
         private void Awake()
@@ -40,7 +42,7 @@ namespace Game.Runtime
 
         private void Update()
         {
-            if (_currentGameMode == null)
+            if (_currentGameMode == null || _isGameFinished)
             {
                 return;
             }
@@ -70,9 +72,9 @@ namespace Game.Runtime
             _disposables = null;
             
             _currentGameMode.Stop();
-            
+
+            _isGameFinished = true;
             _gameFinishedEvent.Raise(winningPlayer);
-            
         }
     }
 }

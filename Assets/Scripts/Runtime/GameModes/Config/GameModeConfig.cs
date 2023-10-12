@@ -2,7 +2,7 @@
 
 namespace Runtime.GameModes.Config
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Simple GameMode Config")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/GameMode Config/Base")]
     public class GameModeConfig : ScriptableObject
     {
         [field: SerializeField]

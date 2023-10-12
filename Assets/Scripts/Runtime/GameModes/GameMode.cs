@@ -34,12 +34,12 @@ namespace Runtime.GameModes
             {
                 _playersDeathTimer[i] = _config.DeathTime;
             }
-            
-            GeneratePatterns();
         }
 
         public virtual void Start()
         {
+            GeneratePatterns();
+            
             foreach (Player player in _playerManager.GetPlayers())
             {
                 player.OnInputPressed += OnPlayerInputPressed;
