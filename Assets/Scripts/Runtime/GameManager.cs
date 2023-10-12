@@ -12,6 +12,7 @@ namespace Game.Runtime
     {
         [Header("Params")]
         [SerializeField] private FloatVariable _gameStartDelayInSeconds;
+        [SerializeField] private FloatVariable _gameStartTimer;
         [SerializeField] private FloatVariable _scoreToReach;
         
         [Header("Dependencies")]
@@ -41,8 +42,15 @@ namespace Game.Runtime
                 );
             }
 
-            // _gameStartRequestedEvent.AddListener(StartGame); For later
-            yield return new WaitForSeconds(_gameStartDelayInSeconds.Value);
+            // _gameStartRequestedEvent.AddListener(StartGame); FOR LATER
+            
+            // Delay start game
+            _gameStartTimer.Value = _gameStartDelayInSeconds.Value;
+            while (_gameStartTimer.Value > 0f)
+            {
+                yield return null;
+                _gameStartTimer.Value -= Time.deltaTime;
+            }
             
             StartGame();
         }

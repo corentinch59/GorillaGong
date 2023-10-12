@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameStartDelayInSeconds: {fileID: 11400000, guid: bb1cbce2548c42b48bcdd7452244340a,
     type: 2}
+  _gameStartTimer: {fileID: 11400000, guid: 9acc6dc125ba5da40a8a4e1b860b1893, type: 2}
   _scoreToReach: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
   _playerManager: {fileID: 0}
   _gameModeFactory: {fileID: 6069484253829211549}
