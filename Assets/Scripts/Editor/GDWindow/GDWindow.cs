@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +8,8 @@ namespace Editor.GDWindow
     public class GDWindow : EditorWindow
     {
         // Data
-        private ScriptableObject[] _allObjects;
+        private Dictionary<string, List<ScriptableObject>> _gdDatas;
+        private const string _labelName = "GD";
         
         // GUI
         private Vector2 _scrollPos;
@@ -28,9 +27,7 @@ namespace Editor.GDWindow
 
         private void OnEnable()
         {
-            _allObjects = LoadAllAssets<ScriptableObject>()
-                .Where(obj => AssetDatabase.GetLabels(obj).Contains("GD"))
-                .ToArray();
+            LoadAllAssets<ScriptableObject>();
         }
 
         private void OnGUI()
@@ -38,40 +35,78 @@ namespace Editor.GDWindow
             // Title and subtitle
             GUILayout.Label("GD WINDOW", new GUIStyle(GUI.skin.label){fontSize = 30});
             GUILayout.Label("Bang bang goes the gorilla", new GUIStyle(GUI.skin.label){fontStyle = FontStyle.Italic});
+
+            // Refresh button
+            float refreshButtonSize = 20f;
+            Rect refreshButtonRect = new Rect(Screen.width - refreshButtonSize, 0, 
+                refreshButtonSize, refreshButtonSize);
+            if (GUI.Button(refreshButtonRect, "➰"))
+            {
+                LoadAllAssets<ScriptableObject>();
+            }
+            
+            GUILayout.Space(5);
             
             // Content
             using (var scrollView = new EditorGUILayout.ScrollViewScope(_scrollPos))
             {
                 _scrollPos = scrollView.scrollPosition;
-                
-                for (int i = 0; i < _allObjects.Length; i++)
+
+                foreach (KeyValuePair<string,List<ScriptableObject>> keyValuePair in _gdDatas)
                 {
-                    ScriptableObject element = _allObjects[i];
-                    GUIStyle style = element == Selection.activeObject
-                        ? new GUIStyle(GUI.skin.button){normal = {textColor = _selectedButtonColor}}
-                        : GUI.skin.button;
-                    
-                    if (GUILayout.Button(element.name, style))
+                    GUILayout.Label(keyValuePair.Key + ":");
+
+                    foreach (ScriptableObject scriptableObject in keyValuePair.Value)
                     {
-                        Selection.activeObject = element;
+                        GUIStyle style = scriptableObject == Selection.activeObject
+                            ? new GUIStyle(GUI.skin.button){normal = {textColor = _selectedButtonColor}}
+                            : GUI.skin.button;
+                        
+                        if (GUILayout.Button(scriptableObject.name, style))
+                        {
+                            Selection.activeObject = scriptableObject;
+                        }
                     }
                 }
             }
         }
         
-        private IEnumerable<T> LoadAllAssets<T>() where T : ScriptableObject
+        private void LoadAllAssets<T>() where T : ScriptableObject
         {
-            List<T> results = new();
+            if (_gdDatas is not null)
+            {
+                _gdDatas.Clear();
+            }
+            else
+            {
+                _gdDatas = new();
+            }
+            
             string[] guids = AssetDatabase.FindAssets("t:"+typeof(T), null);
             foreach (string guid in guids)
             {
-                T item = (T)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guid), typeof(T));
-                if (item != null)
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                T item = (T)AssetDatabase.LoadAssetAtPath(path, typeof(T));
+                if (item == null)
                 {
-                    results.Add(item);
+                    continue;
+                }
+                
+                if (!AssetDatabase.GetLabels(item).Contains(_labelName))
+                {
+                    continue;
+                }
+
+                string key = path.Split('/')[^2];
+                if (_gdDatas.TryGetValue(key, out var directoryDatas))
+                {
+                    directoryDatas.Add(item);
+                }
+                else
+                {
+                    _gdDatas[key] = new List<ScriptableObject>() { item };
                 }
             }
-            return results;
         }
     }
 }
