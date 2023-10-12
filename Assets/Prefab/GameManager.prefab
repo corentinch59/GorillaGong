@@ -56,6 +56,7 @@ MonoBehaviour:
     type: 2}
   _gameStartedEvent: {fileID: 11400000, guid: 7a63ada4ac797d449be1b6a323a64400, type: 2}
   _gameFinishedEvent: {fileID: 11400000, guid: 33632dc6e06f3da469926284c71d7bd6, type: 2}
+  _gameState: {fileID: 11400000, guid: 84efeee100f983d408cc0edecfd666a7, type: 2}
 --- !u!114 &6069484253829211549
 MonoBehaviour:
   m_ObjectHideFlags: 0

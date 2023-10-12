@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Runtime;
 using Runtime.GameEvents;
 using Runtime.GameModes;
 using Runtime.GameModes.Factory;
+using Runtime.GameStates;
 using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
@@ -23,14 +26,17 @@ namespace Game.Runtime
         [SerializeField] private GameEvent _gameStartRequestedEvent;
         [SerializeField] private GameEvent _gameStartedEvent;
         [SerializeField] private PlayerModelGameEvent _gameFinishedEvent;
+
+        [Header("Variables")] 
+        [SerializeField] private GameStateVariable _gameState;
         
         private IGameMode _currentGameMode;
-        private bool _isGameFinished;
         private CompositeDisposable _disposables;
 
         private void Awake()
         {
             _disposables = new CompositeDisposable();
+            _gameState.Value = GameState.Preparation;
         }
 
         private IEnumerator Start()
@@ -45,6 +51,7 @@ namespace Game.Runtime
             // _gameStartRequestedEvent.AddListener(StartGame); FOR LATER
             
             // Delay start game
+            _gameState.Value = GameState.Starting;
             _gameStartTimer.Value = _gameStartDelayInSeconds.Value;
             while (_gameStartTimer.Value > 0f)
             {
@@ -60,17 +67,24 @@ namespace Game.Runtime
             _currentGameMode = _gameModeFactory.Create(GameModeType.Main);
             _currentGameMode.Start();
             
+            _gameState.Value = GameState.Gameplay;
             _gameStartedEvent.Raise();
         }
 
         private void Update()
         {
-            if (_currentGameMode == null || _isGameFinished)
+            switch (_gameState.Value)
             {
-                return;
+                case GameState.Preparation:
+                case GameState.Starting:
+                case GameState.GameOver:
+                    break;
+                case GameState.Gameplay:
+                    _currentGameMode?.Update(Time.deltaTime);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            
-            _currentGameMode.Update(Time.deltaTime);
         }
 
         private void OnDestroy()
@@ -96,7 +110,7 @@ namespace Game.Runtime
             
             _currentGameMode.Stop();
 
-            _isGameFinished = true;
+            _gameState.Value = GameState.GameOver;
             _gameFinishedEvent.Raise(winningPlayer);
         }
     }
