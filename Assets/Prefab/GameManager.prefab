@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1640668742643407309}
   - component: {fileID: 3587511897823108409}
   - component: {fileID: 6069484253829211549}
+  - component: {fileID: 9005679881899460258}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -67,3 +68,20 @@ MonoBehaviour:
     type: 2}
   _playerFailEvent: {fileID: 11400000, guid: ffa58c5cac6a5dd4f9dc8109f77d067c, type: 2}
   _playerManager: {fileID: 0}
+--- !u!114 &9005679881899460258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398013180683687606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e75b7f21364a00b898c323858e8c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameModesDictionary: {fileID: 11400000, guid: 6e4fc92829481234bb325ac56a49797c,
+    type: 2}
+  _anyGameModeStarted: {fileID: 11400000, guid: 5d25eb9d7bf56694589cea2e8265511f,
+    type: 2}
+  _anyGameModeEnded: {fileID: 11400000, guid: 0ed614a6b668bcf4f82da77b18fd45da, type: 2}

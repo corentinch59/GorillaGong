@@ -1,6 +1,5 @@
 ﻿using Game;
 using Runtime.GameModes.Config;
-using Runtime.Patterns;
 
 namespace Runtime.GameModes
 {
@@ -20,6 +19,8 @@ namespace Runtime.GameModes
                 player.OnInputPressed += OnPlayerInputPressed;
                 PlayerPatterns.Values.Add(player.Index, GetPlayerCurrentPattern(player));
             }
+            
+            Config.GameModeStartedEvent.Raise();
         }
 
         public override void Stop()

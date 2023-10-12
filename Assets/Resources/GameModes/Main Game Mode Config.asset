@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a03fa1c0d0449c3ae1e6a850469ca4f, type: 3}
   m_Name: Main Game Mode Config
   m_EditorClassIdentifier: 
+  <GameModeStartedEvent>k__BackingField: {fileID: 11400000, guid: e074d566bda3a924bbd6e5929f8f336e,
+    type: 2}
+  <GameModeStoppedEvent>k__BackingField: {fileID: 11400000, guid: e298bc5ae12abcd4a96af6c18fa0b62c,
+    type: 2}
   <ScoreGain>k__BackingField: 5
   <ScoreLoss>k__BackingField: 3
   <DeathTime>k__BackingField: 2

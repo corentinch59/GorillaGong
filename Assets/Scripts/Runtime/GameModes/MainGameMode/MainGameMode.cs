@@ -50,7 +50,7 @@ namespace Runtime.GameModes.MainGameMode
             base.OnPlayerFailed(player);
             GoToNextIteration(player);
         }
-
+        
         protected override void OnPlayerSuccess(Player player)
         {
             base.OnPlayerSuccess(player);

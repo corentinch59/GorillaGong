@@ -5,6 +5,7 @@ namespace Runtime.GameModes.Config
     [CreateAssetMenu(menuName = "ScriptableObjects/GameModes/Config/Main")]
     public class MainGameModeConfig : GameModeConfig
     {
+        [field: Header("Main Game Mode Specific")]
         [field: SerializeField]
         public int DeathTime { get; private set; }
         
