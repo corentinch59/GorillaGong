@@ -370,13 +370,13 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 787380623}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: 4a74f61bf7075e8439f9a759ece2693f, type: 3}
+        Sfx: {fileID: 8300000, guid: 6434374732d3bd7458ba72df8b68884e, type: 3}
         RandomSfx: []
         SequentialOrder: 0
         SequentialOrderHoldLast: 0
         SequentialOrderHoldCooldownDuration: 2
-        MinVolume: 1
-        MaxVolume: 1
+        MinVolume: 0.2
+        MaxVolume: 0.2
         MinPitch: 1
         MaxPitch: 1
         PlaybackTime: {x: 0, y: 0}
@@ -764,13 +764,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
+      propertyPath: managedReferences[5554306412267438083].Sfx
+      value: 
+      objectReference: {fileID: 8300000, guid: adb24518d159048ca9cb62d63113784f, type: 3}
+    - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
+        type: 3}
       propertyPath: managedReferences[5554306412267438083].MaxVolume
-      value: 0.3
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MinVolume
-      value: 0.3
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7343390447476414184, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
@@ -843,6 +848,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3098524839965417266, guid: 02e90e7de0d5a3f418d5572ff7122c30,
         type: 3}
+      propertyPath: MaxPitch
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098524839965417266, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: MinPitch
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098524839965417266, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
       propertyPath: MaxVolume
       value: 0.3
       objectReference: {fileID: 0}
@@ -906,6 +921,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSucessSound
       objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].Sfx
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].MaxPitch
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].MinPitch
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].MaxVolume
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].MinVolume
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2577ed61c1db9f6498a778ee6c151f61, type: 3}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 47ad5e089de4df14cb734e7a7b506aa4, type: 3}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6a06a30ad6e50784cb5bd626a5c7a065, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

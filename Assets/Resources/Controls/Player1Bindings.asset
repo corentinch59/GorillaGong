@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player1Bindings
   m_EditorClassIdentifier: 
   _playerBindings:
-  - q
   - w
+  - d
   - a
   - s

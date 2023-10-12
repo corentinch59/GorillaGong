@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a03fa1c0d0449c3ae1e6a850469ca4f, type: 3}
   m_Name: Main Game Mode Config
   m_EditorClassIdentifier: 
-  <ScoreGain>k__BackingField: 10
-  <ScoreLoss>k__BackingField: 5
+  <ScoreGain>k__BackingField: 5
+  <ScoreLoss>k__BackingField: 3
   <DeathTime>k__BackingField: 2
-  <DoubleInputProbability>k__BackingField: 0.25
+  <DoubleInputProbability>k__BackingField: 0.2
