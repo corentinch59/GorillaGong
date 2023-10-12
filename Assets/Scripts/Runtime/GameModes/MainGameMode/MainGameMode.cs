@@ -9,8 +9,10 @@ namespace Runtime.GameModes.MainGameMode
 {
     public class MainGameMode : GameMode<MainGameModeConfig>
     {
+        public override bool IsFinished => false;
+        
         private List<Pattern> _patterns = new();
-
+        
         private float[] _playersDeathTimer;
         private int[] _playersCurrentIteration;
 
@@ -21,11 +23,13 @@ namespace Runtime.GameModes.MainGameMode
 
         public override void Start()
         {
-            _playersCurrentIteration = new int[PlayerManager.PlayersCount()];
             InitPlayersDeathTimer();
-            
-            GeneratePatterns();
-            
+            if (_playersCurrentIteration is null)
+            {
+                _playersCurrentIteration = new int[PlayerManager.PlayersCount()];
+                GeneratePatterns();
+            }
+
             base.Start();
         }
 
@@ -65,7 +69,7 @@ namespace Runtime.GameModes.MainGameMode
 
             PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
         }
-
+        
         public override Pattern GetPlayerCurrentPattern(Player player)
         {
             int iterationIndex = _playersCurrentIteration[player.Index];
@@ -82,10 +86,9 @@ namespace Runtime.GameModes.MainGameMode
                 if (random < Config.DoubleInputProbability)
                 {
                     int[] inputs = new int[2];
-                    for (int j = 0; j < inputs.Length; j++)
-                    {
-                        inputs[j] = GenerateRandomInput();
-                    }
+                    inputs[0] = GenerateRandomInput();
+                    do { inputs[1] = GenerateRandomInput(); }
+                    while (inputs[0] == inputs[1]);
 
                     generatedPattern = new Pattern(inputs);
                 }

@@ -11,7 +11,8 @@ namespace Runtime.GameModes
         protected PlayerPatterns.PlayerPatterns PlayerPatterns { get; private set; }
         protected PlayerModelGameEvent PlayerSuccessEvent {get; private set;}
         protected PlayerModelGameEvent PlayerFailEvent {get; private set;}
-        
+
+        public abstract bool IsFinished { get; }
         public abstract Pattern GetPlayerCurrentPattern(Player player);
         public abstract void Start();
         public abstract void Update(float deltaTime);
