@@ -36,7 +36,7 @@ namespace Game.Runtime
                 );
             }
             
-            _currentGameMode = _gameModeFactory.Create(GameModeType.Simple);
+            _currentGameMode = _gameModeFactory.Create(GameModeType.Main);
             _currentGameMode.Start();
         }
 

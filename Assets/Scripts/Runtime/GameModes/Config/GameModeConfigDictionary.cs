@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Runtime.GameModes.Config
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/GameMode/GameModeConfig Dictionary", order = 0)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/GameModes/GameModeConfig Dictionary", order = 0)]
     public class GameModeConfigDictionary : ScriptableObject
     {
         public IReadOnlyDictionary<GameModeType, GameModeConfig> Values => _values;

@@ -2,6 +2,7 @@
 {
     public enum GameModeType
     {
-        Simple
+        Main,
+        Spam,
     }
 }

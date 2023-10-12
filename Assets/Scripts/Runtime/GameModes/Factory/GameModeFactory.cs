@@ -22,11 +22,17 @@ namespace Runtime.GameModes.Factory
         public IGameMode Create(GameModeType type)
         {
             GameModeConfig gameModeConfig = GetGameModeConfig(type);
-            return type switch
+            GameMode gameMode = type switch
             {
-                GameModeType.Simple => new SimpleGameMode(gameModeConfig, _playerManager, _playerPatterns, _playerSuccessEvent, _playerFailEvent),
+                GameModeType.Main => new MainGameMode.MainGameMode(gameModeConfig),
+                GameModeType.Spam => new SpamGameMode.SpamGameMode(gameModeConfig),
                 _ => throw new InvalidEnumArgumentException()
             };
+            gameMode.SetPlayerManager(_playerManager)
+                .SetPlayerPatterns(_playerPatterns)
+                .SetPlayerFailEvent(_playerFailEvent)
+                .SetPlayerSuccessEvent(_playerSuccessEvent);
+            return gameMode;
         }
 
         public GameModeConfig GetGameModeConfig(GameModeType type)
