@@ -48,8 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameStartDelayInSeconds: {fileID: 11400000, guid: bb1cbce2548c42b48bcdd7452244340a,
     type: 2}
-  _gameStartTimer: {fileID: 11400000, guid: 9acc6dc125ba5da40a8a4e1b860b1893, type: 2}
   _scoreToReach: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
+  _gameModesIntervalInSecondsMinMax: {fileID: 11400000, guid: 99f29fccb2e65e344bc2e10998e9ae5c,
+    type: 2}
+  _gameModePreparationDuration: {fileID: 11400000, guid: 80d63b08b8f4f3f4da1d8fbdcd2b6f95,
+    type: 2}
+  _gameModeEndTransitionDuration: {fileID: 11400000, guid: 7dd6c2da2c1c8364c8e73ed39478cda4,
+    type: 2}
   _playerManager: {fileID: 0}
   _gameModeFactory: {fileID: 6069484253829211549}
   _gameStartRequestedEvent: {fileID: 11400000, guid: 99dd8ffd2493d8846b3915a704cb62f2,
@@ -57,6 +62,11 @@ MonoBehaviour:
   _gameStartedEvent: {fileID: 11400000, guid: 7a63ada4ac797d449be1b6a323a64400, type: 2}
   _gameFinishedEvent: {fileID: 11400000, guid: 33632dc6e06f3da469926284c71d7bd6, type: 2}
   _gameState: {fileID: 11400000, guid: 84efeee100f983d408cc0edecfd666a7, type: 2}
+  _gameStartTimer: {fileID: 11400000, guid: 9acc6dc125ba5da40a8a4e1b860b1893, type: 2}
+  _gameModePreparationTimer: {fileID: 11400000, guid: bfe91b23bbd72f74b8bd1221977a53fa,
+    type: 2}
+  _gameModeTransitionTimer: {fileID: 11400000, guid: 445ef522f616f5841aa5cebec82cdb67,
+    type: 2}
 --- !u!114 &6069484253829211549
 MonoBehaviour:
   m_ObjectHideFlags: 0
