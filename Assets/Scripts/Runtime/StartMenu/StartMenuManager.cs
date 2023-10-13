@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using GorillaGong.Runtime.GameEvents;
 using GorillaGong.Runtime.Player;
 using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class StartMenuManager : MonoBehaviour
 {
@@ -20,7 +16,8 @@ public class StartMenuManager : MonoBehaviour
     [Header("Events")] 
     [SerializeField] private GameEvent _allPlayersReadyEvent;
     [SerializeField] private UnityEvent _allPlayersReadyResponse;
-    [SerializeField] private PlayerBooleanGameEvent _playerReadinessChangedEvent;
+    [SerializeField] private PlayerModelGameEvent _playerReadyEvent;
+    [SerializeField] private PlayerModelGameEvent _playerUnreadyEvent;
 
     private bool[] _playersReadiness;
     
@@ -54,7 +51,14 @@ public class StartMenuManager : MonoBehaviour
         // Players pressed ready inputs
         bool newValue = !_playersReadiness[player.Index];
         _playersReadiness[player.Index] = newValue;
-        _playerReadinessChangedEvent.Raise(new PlayerBoolean(player, newValue));
+        if (newValue)
+        {
+            _playerReadyEvent.Raise(player);
+        }
+        else
+        {
+            _playerUnreadyEvent.Raise(player);
+        }
 
         foreach (bool isPlayerReady in _playersReadiness)
         {

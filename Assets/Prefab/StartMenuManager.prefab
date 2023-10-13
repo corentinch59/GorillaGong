@@ -51,5 +51,6 @@ MonoBehaviour:
   _allPlayersReadyResponse:
     m_PersistentCalls:
       m_Calls: []
-  _playerReadinessChangedEvent: {fileID: 11400000, guid: 00807b5b8a72bca48b3f0856012562a2,
+  _playerReadyEvent: {fileID: 11400000, guid: 0f81dc496061b8247a395c22ec05be9e, type: 2}
+  _playerUnreadyEvent: {fileID: 11400000, guid: 2d7ca2b63ba166c438198767a29f9cc7,
     type: 2}
