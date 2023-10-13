@@ -4,5 +4,6 @@
     {
         Main,
         Spam,
+        Rhythm,
     }
 }
