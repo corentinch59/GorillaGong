@@ -12,6 +12,7 @@ namespace GorillaGong.Runtime.GameModes
         protected PlayerModelGameEvent PlayerFailEvent {get; private set;}
 
         public abstract bool IsFinished { get; }
+        public abstract bool IsPlaying { get; }
         public abstract Pattern GetPlayerCurrentPattern(Player.Player player);
         public abstract void Start();
         public abstract void Update(float deltaTime);

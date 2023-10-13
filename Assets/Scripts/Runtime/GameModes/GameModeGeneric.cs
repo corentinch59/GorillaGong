@@ -5,6 +5,8 @@ namespace GorillaGong.Runtime.GameModes
     public abstract class GameMode<T> : GameMode where T : GameModeConfig
     {
         protected readonly T Config;
+        public override bool IsPlaying => !IsFinished && _isPlaying;
+        protected bool _isPlaying;
 
         protected GameMode(T gameModeConfig)
         {
@@ -16,10 +18,12 @@ namespace GorillaGong.Runtime.GameModes
             foreach (Player.Player player in PlayerManager.GetPlayers())
             {
                 player.OnInputPressed += OnPlayerInputPressed;
-                PlayerPatterns.Values.Add(player.Index, GetPlayerCurrentPattern(player));
+                PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
             }
             
             Config.GameModeStartedEvent.Raise();
+
+            _isPlaying = true;
         }
 
         public override void Stop()
@@ -27,7 +31,10 @@ namespace GorillaGong.Runtime.GameModes
             foreach (Player.Player player in PlayerManager.GetPlayers())
             {
                 player.OnInputPressed -= OnPlayerInputPressed;
+                PlayerPatterns.Values[player.Index] = null;
             }
+
+            _isPlaying = false;
         }
 
         protected virtual void OnPlayerInputPressed(Player.Player player, int[] inputsIds)
