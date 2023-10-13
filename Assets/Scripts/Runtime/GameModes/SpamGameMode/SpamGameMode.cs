@@ -9,7 +9,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
     {
         public override bool IsFinished => _isFinished;
         private bool _isFinished;
-        
+
         private int[] _playersInputsCount;
         private int _offset = 0;
 
@@ -22,7 +22,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
 
         public override void Start()
         {
-            _timer = Config.TotalDuration;
+            _timer = Config.EventDuration;
 
             _playersInputsCount = new int[PlayerManager.PlayersCount()];
             _offset = UnityEngine.Random.Range(0, 2);

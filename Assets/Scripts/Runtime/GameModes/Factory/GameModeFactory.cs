@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using GorillaGong.Runtime.GameEvents;
 using GorillaGong.Runtime.GameModes.Config;
 using GorillaGong.Runtime.Player;
@@ -35,6 +37,19 @@ namespace GorillaGong.Runtime.GameModes.Factory
             return gameMode;
         }
 
+        public IGameMode CreateRandom()
+        {
+            var possibilities = _gameModeConfigs.Values.Keys.ToList();
+            possibilities.Remove(GameModeType.Main);
+
+            if (possibilities.Count == 0)
+            {
+                throw new Exception("No other GameMode than 'Main' in the available GameModes");
+            }
+
+            return Create(possibilities[UnityEngine.Random.Range(0, possibilities.Count)]);
+        }
+        
         public GameModeConfig GetGameModeConfig(GameModeType type)
         {
             if(!_gameModeConfigs.Values.TryGetValue(type, out GameModeConfig config))

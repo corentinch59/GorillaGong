@@ -15,8 +15,10 @@ namespace GorillaGong.Runtime
     {
         [Header("Params")]
         [SerializeField] private FloatVariable _gameStartDelayInSeconds;
-        [SerializeField] private FloatVariable _gameStartTimer;
         [SerializeField] private FloatVariable _scoreToReach;
+        [SerializeField] private Vector2Variable _gameModesIntervalInSecondsMinMax;
+        [SerializeField] private FloatVariable _gameModePreparationDuration;
+        [SerializeField] private FloatVariable _gameModeEndTransitionDuration;
         
         [Header("Dependencies")]
         [SerializeField] private PlayerManager _playerManager;
@@ -29,8 +31,13 @@ namespace GorillaGong.Runtime
 
         [Header("Variables")] 
         [SerializeField] private GameStateVariable _gameState;
+        [SerializeField] private FloatVariable _gameStartTimer;
+        [SerializeField] private FloatVariable _gameModePreparationTimer;
+        [SerializeField] private FloatVariable _gameModeTransitionTimer;
         
         private IGameMode _currentGameMode;
+        private IGameMode _mainGameMode;
+        private float _eventTimer;
         private CompositeDisposable _disposables;
 
         private void Awake()
@@ -64,7 +71,10 @@ namespace GorillaGong.Runtime
 
         private void StartGame()
         {
-            _currentGameMode = _gameModeFactory.Create(GameModeType.Main);
+            _mainGameMode = _gameModeFactory.Create(GameModeType.Main);
+            _currentGameMode = _mainGameMode;
+            _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,
+                _gameModesIntervalInSecondsMinMax.Value.y);
             _currentGameMode.Start();
             
             _gameState.Value = GameState.Gameplay;
@@ -80,11 +90,69 @@ namespace GorillaGong.Runtime
                 case GameState.GameOver:
                     break;
                 case GameState.Gameplay:
-                    _currentGameMode?.Update(Time.deltaTime);
+                    GameplayUpdate();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void GameplayUpdate()
+        {
+            if (_currentGameMode is null)
+            {
+                _gameModeTransitionTimer.Value -= Time.deltaTime;
+                if (_gameModeTransitionTimer <= 0f)
+                {
+                    _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,
+                        _gameModesIntervalInSecondsMinMax.Value.y);
+                    _currentGameMode = _mainGameMode;
+                    _currentGameMode.Start();
+                }
+                return;
+            }
+
+            if (_currentGameMode.IsPlaying)
+            {
+                _currentGameMode.Update(Time.deltaTime);
+            }
+
+            // Handle game modes timer and game mode preparation
+            if (_currentGameMode == _mainGameMode)
+            {
+                if (_currentGameMode.IsPlaying)
+                {
+                    _eventTimer -= Time.deltaTime;
+                    if (_eventTimer <= 0f)
+                    {
+                        _currentGameMode.Stop();
+                        _gameModePreparationTimer.Value = _gameModePreparationDuration.Value;
+                        Debug.Log("Stopped main game mode");
+                    }
+                }
+                else
+                {
+                    _gameModePreparationTimer.Value -= Time.deltaTime;
+                    if (_gameModePreparationTimer.Value <= 0f)
+                    {
+                        Debug.Log("Starting new game mode");
+                        _currentGameMode = _gameModeFactory.CreateRandom();
+                        _currentGameMode.Start();
+                    }
+                }
+                return;
+            }
+            
+            // GameMode is not main game mode
+            // Handle game mode switch on current game mode end
+            if (!_currentGameMode.IsFinished)
+            {
+                return;
+            }
+            _currentGameMode.Stop();
+            _currentGameMode = null;
+            _gameModeTransitionTimer.Value = _gameModeEndTransitionDuration.Value;
+            Debug.Log("Stopped game mode");
         }
 
         private void OnDestroy()
@@ -108,10 +176,10 @@ namespace GorillaGong.Runtime
             _disposables?.Dispose();
             _disposables = null;
             
-            _currentGameMode.Stop();
-
             _gameState.Value = GameState.GameOver;
             _gameFinishedEvent.Raise(winningPlayer);
+
+            _currentGameMode.Stop();
         }
     }
 }

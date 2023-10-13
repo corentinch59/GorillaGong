@@ -6,5 +6,6 @@ namespace GorillaGong.Runtime.GameModes.Factory
     {
         public IGameMode Create(GameModeType type);
         public GameModeConfig GetGameModeConfig(GameModeType type);
+        public IGameMode CreateRandom();
     }
 }
