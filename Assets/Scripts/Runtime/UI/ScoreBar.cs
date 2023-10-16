@@ -9,8 +9,6 @@ namespace GorillaGong.Runtime.UI
 {
     public class ScoreBar : PlayerElement
     {
-        private static int _nbInstances;
-
         [SerializeField] private Image _image;
         [SerializeField] private Material _scoreMaterial;
         [SerializeField] private FloatVariable _maxScore;
@@ -27,9 +25,7 @@ namespace GorillaGong.Runtime.UI
         {
             _scoreMaterial = Instantiate(_scoreMaterial);
             _image.material = _scoreMaterial;
-            _scoreMaterial.SetFloat("_Player", _nbInstances); 
             _disposable = player.Score.Subscribe(UpdateScoreBar);
-            _nbInstances++;
         }
 
         public void UpdateScoreBar(float amount)
