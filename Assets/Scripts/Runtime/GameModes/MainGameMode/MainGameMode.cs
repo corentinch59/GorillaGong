@@ -32,6 +32,12 @@ namespace GorillaGong.Runtime.GameModes.MainGameMode
             base.Start();
         }
 
+        public override void Stop()
+        {
+            base.Stop();
+            _config.GameModeStoppedEvent.Raise();
+        }
+
         public override void Update(float deltaTime)
         {
             for (int i = 0; i < _playersDeathTimer.Length; i++)

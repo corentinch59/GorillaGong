@@ -13,6 +13,11 @@ namespace ScriptableObjectArchitecture
 
         public void Raise(T value)
         {
+            if (Debug)
+            {
+                UnityEngine.Debug.Log($"Event '{name}' has been called");
+            }
+            
             AddStackTrace(value);
 
             for (int i = _typedListeners.Count - 1; i >= 0; i--)
@@ -59,6 +64,9 @@ namespace ScriptableObjectArchitecture
 
         public List<StackTraceEntry> StackTraces { get { return _stackTraces; } }
         private List<StackTraceEntry> _stackTraces = new List<StackTraceEntry>();
+        
+        [field: SerializeField]
+        public bool Debug { get; set; }
 
         public void AddStackTrace()
         {
@@ -77,6 +85,10 @@ namespace ScriptableObjectArchitecture
 
         public void Raise()
         {
+            if (Debug)
+            {
+                UnityEngine.Debug.Log($"Event '{name}' has been called");
+            }
             AddStackTrace();
 
             for (int i = _listeners.Count - 1; i >= 0; i--)

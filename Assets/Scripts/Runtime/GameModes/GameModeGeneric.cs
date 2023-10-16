@@ -38,9 +38,10 @@ namespace GorillaGong.Runtime.GameModes
             _isPlaying = false;
         }
 
+
         protected virtual void OnPlayerInputPressed(Player.Player player, int[] inputsIds)
         {
-            bool rightInputPressed = GetPlayerCurrentPattern(player).IsInputValid(inputsIds);
+            bool rightInputPressed = IsRightInputPressed(player, inputsIds);
             if (rightInputPressed)
             {
                 OnPlayerSuccess(player);
@@ -50,6 +51,7 @@ namespace GorillaGong.Runtime.GameModes
                 OnPlayerFailed(player);
             }
         }
+        protected virtual bool IsRightInputPressed(Player.Player player, int[] inputsIds) => GetPlayerCurrentPattern(player).IsInputValid(inputsIds);
 
         protected virtual void OnPlayerSuccess(Player.Player player)
         {

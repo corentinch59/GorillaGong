@@ -8,5 +8,8 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
     {
         [field: Header("Spam Game Mode Specific")]
         [field: SerializeField] public float EventDuration { get; private set; } = 5f;
+
+        [field: Header("Spam Visuals")]
+        [field: SerializeField] public float VisualBlinkDuration { get; private set; } = 0.1f;
     }
 }
