@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading.Tasks;
 using GorillaGong.Runtime.GameEvents;
 using GorillaGong.Runtime.GameModes;
 using GorillaGong.Runtime.GameModes.Factory;
@@ -46,7 +47,7 @@ namespace GorillaGong.Runtime
             _gameState.Value = GameState.Preparation;
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
             foreach (Player.Player player in _playerManager.GetPlayers())
             {
@@ -55,8 +56,16 @@ namespace GorillaGong.Runtime
                 );
             }
 
-            // _gameStartRequestedEvent.AddListener(StartGame); FOR LATER
-            
+            _gameStartRequestedEvent.AddListener(StartGame);
+        }
+
+        private void StartGame()
+        {
+            StartCoroutine(StartGameAsync());
+            _gameStartedEvent.RemoveListener(StartGame);
+        }
+        private IEnumerator StartGameAsync()
+        {
             // Delay start game
             _gameState.Value = GameState.Starting;
             _gameStartTimer.Value = _gameStartDelayInSeconds.Value;
@@ -66,11 +75,6 @@ namespace GorillaGong.Runtime
                 _gameStartTimer.Value -= Time.deltaTime;
             }
             
-            StartGame();
-        }
-
-        private void StartGame()
-        {
             _mainGameMode = _gameModeFactory.Create(GameModeType.Main);
             _currentGameMode = _mainGameMode;
             _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,

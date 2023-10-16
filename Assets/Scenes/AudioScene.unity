@@ -766,16 +766,26 @@ PrefabInstance:
         type: 3}
       propertyPath: managedReferences[5554306412267438083].Sfx
       value: 
-      objectReference: {fileID: 8300000, guid: adb24518d159048ca9cb62d63113784f, type: 3}
+      objectReference: {fileID: 8300000, guid: 0476bff1faa30954c806edca05f3c515, type: 3}
+    - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438083].MaxPitch
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438083].MinPitch
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MaxVolume
-      value: 0.05
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MinVolume
-      value: 0.05
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7343390447476414184, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
@@ -949,7 +959,7 @@ PrefabInstance:
     - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
         type: 3}
       propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
         type: 3}
@@ -966,6 +976,11 @@ PrefabInstance:
       propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 6a06a30ad6e50784cb5bd626a5c7a065, type: 3}
+    - target: {fileID: 9140163250745644970, guid: 02e90e7de0d5a3f418d5572ff7122c30,
+        type: 3}
+      propertyPath: managedReferences[5554306412267438082].RandomSfx.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: b69463b9e4833ff4e8c18a95179baa73, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

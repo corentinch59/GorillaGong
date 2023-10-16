@@ -33,6 +33,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
         protected override void OnPlayerFailed(Player.Player player) { }
         protected override void OnPlayerSuccess(Player.Player player)
         {
+            PlayerSuccessEvent.Raise(player);
             _playersInputsCount[player.Index]++;
             PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
         }
