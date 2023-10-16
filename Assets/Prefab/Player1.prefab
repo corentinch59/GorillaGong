@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4a7d33fb22e34fb35f0512431e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInputEvent: {fileID: 11400000, guid: eea9e1ce378f3cc43a6972c2183ea0a6, type: 2}
   _doubleInputToleranceInSeconds: 0.05
   _maxScore: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
   _score:

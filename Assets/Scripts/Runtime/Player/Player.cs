@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GorillaGong.Runtime.Inputs;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,6 +10,9 @@ namespace GorillaGong.Runtime.Player
     public partial class Player : MonoBehaviour, IPlayerModel
     {
         public int Index { get; set; }
+
+        [Header("Inputs")] 
+        [SerializeField] private PlayerInputGameEvent _playerInputEvent;
         [SerializeField] private float _doubleInputToleranceInSeconds = 0.1f;
         private List<int> _currentInputs = new List<int>();
         private float _toleranceTimer;
@@ -92,6 +96,7 @@ namespace GorillaGong.Runtime.Player
         private void SendInputPressedEvent()
         {
             OnInputPressed?.Invoke(this, _currentInputs.ToArray());
+            _playerInputEvent.Raise(new GorillaGong.Runtime.Inputs.PlayerInput(this, _currentInputs.ToArray()));
             // Debug.Log($"Inputs pressed: {string.Join(", ", _currentInputs)} // {_doubleInputToleranceInSeconds - _toleranceTimer}");
             _currentInputs.Clear();
         }
