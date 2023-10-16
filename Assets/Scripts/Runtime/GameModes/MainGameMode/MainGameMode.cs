@@ -35,7 +35,7 @@ namespace GorillaGong.Runtime.GameModes.MainGameMode
         public override void Stop()
         {
             base.Stop();
-            _config.GameModeStoppedEvent.Raise();
+            _config.GameModeStoppedEvent.Raise(null);
         }
 
         public override void Update(float deltaTime)
