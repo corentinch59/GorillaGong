@@ -14,12 +14,7 @@ namespace GorillaGong.Runtime.Player
 
         public void AddScore(float amount)
         {
-            _score.Value = Mathf.Min(_maxScore.Value, _score.Value + amount);
-        }
-
-        public void RemoveScore(float amount)
-        {
-            _score.Value = Mathf.Max(0, _score.Value - amount);
+            _score.Value = Mathf.Clamp(_score.Value + amount, 0f, _maxScore.Value);
         }
     }
 }

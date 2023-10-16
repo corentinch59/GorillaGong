@@ -55,13 +55,13 @@ namespace GorillaGong.Runtime.GameModes
 
         protected virtual void OnPlayerSuccess(Player.Player player)
         {
-            player.AddScore(_config.ScoreGain);
+            player.AddScore(_config.WinnerScoreGain);
             PlayerSuccessEvent.Raise(player);
         }
 
         protected virtual void OnPlayerFailed(Player.Player player)
         {
-            player.RemoveScore(_config.ScoreLoss);
+            player.AddScore(_config.LoserScoreGain);
             PlayerFailEvent.Raise(player);
         }
 

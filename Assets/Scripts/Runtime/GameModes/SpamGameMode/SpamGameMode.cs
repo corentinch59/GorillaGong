@@ -36,15 +36,20 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
 
         public override void Stop()
         {
+            // Give the right amount of score for the winner(s) and the loser(s)
             IEnumerable<int> winnersIndex = _playersInputsCount.Select((value, index) => (value, index))
                 .Where(tuple => tuple.value == _playersInputsCount.Max())
                 .Select(tuple => tuple.index);
             IReadOnlyList<Player.Player> players = PlayerManager.GetPlayers(); 
-            foreach (int winnerIndex in winnersIndex)
+            for (int i = 0; i < _playersInputsCount.Length; i++)
             {
-                Player.Player player = players[winnerIndex];
-                player.AddScore(_config.ScoreGain);
-                _config.GameModeStoppedEvent.Raise(player);
+                bool isWinner = winnersIndex.Contains(i);
+                Player.Player player = players[i];
+                player.AddScore(isWinner ? _config.WinnerScoreGain : _config.LoserScoreGain);    
+                if (isWinner)
+                {
+                    _config.GameModeStoppedEvent.Raise(player);
+                }
             }
             
             base.Stop();

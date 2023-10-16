@@ -1,6 +1,7 @@
 ﻿using GorillaGong.Runtime.GameEvents;
 using ScriptableObjectArchitecture;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GorillaGong.Runtime.GameModes.Config
 {
@@ -19,9 +20,9 @@ namespace GorillaGong.Runtime.GameModes.Config
         
         [field: Header("Score")]
         [field: SerializeField]
-        public int ScoreGain { get; private set; }
+        public int WinnerScoreGain { get; private set; }
         
         [field: SerializeField] 
-        public int ScoreLoss { get; private set; }
+        public int LoserScoreGain { get; private set; }
     }
 }
