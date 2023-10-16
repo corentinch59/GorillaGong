@@ -2408,6 +2408,7 @@ GameObject:
   - component: {fileID: 1974978009}
   - component: {fileID: 1974978008}
   - component: {fileID: 1974978010}
+  - component: {fileID: 1974978011}
   m_Layer: 5
   m_Name: TimerText
   m_TagString: Untagged
@@ -2545,6 +2546,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _variable: {fileID: 11400000, guid: bfe91b23bbd72f74b8bd1221977a53fa, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls: []
+  _text: {fileID: 1974978008}
+--- !u!114 &1974978011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974978006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f70f6b440609c4081d9ed41b6684a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _variable: {fileID: 11400000, guid: 445ef522f616f5841aa5cebec82cdb67, type: 2}
   _response:
     m_PersistentCalls:
       m_Calls: []
