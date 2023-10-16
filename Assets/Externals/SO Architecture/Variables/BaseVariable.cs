@@ -111,7 +111,7 @@ namespace ScriptableObjectArchitecture
             if (!_readOnly || !_raiseWarning)
                 return;
 
-            Debug.LogWarning("Tried to set value on " + name + ", but value is readonly!", this);
+            UnityEngine.Debug.LogWarning("Tried to set value on " + name + ", but value is readonly!", this);
         }
         public override string ToString()
         {

@@ -30,6 +30,22 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
             base.Start();
         }
 
+        public override void Stop()
+        {
+            IEnumerable<int> winnersIndex = _playersInputsCount.Select((value, index) => (value, index))
+                .Where(tuple => tuple.value == _playersInputsCount.Max())
+                .Select(tuple => tuple.index);
+            IReadOnlyList<Player.Player> players = PlayerManager.GetPlayers(); 
+            foreach (int winnerIndex in winnersIndex)
+            {
+                Player.Player player = players[winnerIndex];
+                player.AddScore(_config.ScoreGain);
+                _config.GameModeStoppedEvent.Raise(player);
+            }
+            
+            base.Stop();
+        }
+
         // Overriding cause we don't want to decrease player score or call failed event
         protected override void OnPlayerFailed(Player.Player player) { }
         protected override void OnPlayerSuccess(Player.Player player)
@@ -57,17 +73,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
             {
                 return;
             }
-            
-            IEnumerable<int> winnersIndex = _playersInputsCount.Select((value, index) => (value, index))
-                .Where(tuple => tuple.value == _playersInputsCount.Max())
-                .Select(tuple => tuple.index);
-            IReadOnlyList<Player.Player> players = PlayerManager.GetPlayers(); 
-            foreach (int winnerIndex in winnersIndex)
-            {
-                Player.Player player = players[winnerIndex];
-                player.AddScore(_config.ScoreGain);
-                _config.GameModeStoppedEvent.Raise(player);
-            }
+            _isFinished = true;
             _isFinished = true;
         }
     }
