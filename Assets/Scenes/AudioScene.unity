@@ -770,22 +770,22 @@ PrefabInstance:
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MaxPitch
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MinPitch
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MaxVolume
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6182754810723557453, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
       propertyPath: managedReferences[5554306412267438083].MinVolume
-      value: 2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7343390447476414184, guid: 73d288eb009743d43a8fa2733093e15e,
         type: 3}
