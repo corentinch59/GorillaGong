@@ -67,6 +67,10 @@ MonoBehaviour:
     type: 2}
   _gameModeTransitionTimer: {fileID: 11400000, guid: 445ef522f616f5841aa5cebec82cdb67,
     type: 2}
+  _currentGameModeType: {fileID: 11400000, guid: e240f54420fa9b3479c2e22616443f97,
+    type: 2}
+  _currentGameModeConfig: {fileID: 11400000, guid: fd55766813cff8245a3b51d428e04c4d,
+    type: 2}
 --- !u!114 &6069484253829211549
 MonoBehaviour:
   m_ObjectHideFlags: 0

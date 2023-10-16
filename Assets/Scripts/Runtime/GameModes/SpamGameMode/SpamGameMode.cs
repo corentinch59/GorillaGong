@@ -7,6 +7,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
 {
     public class SpamGameMode : GameMode<SpamGameModeConfig>
     {
+        public override GameModeType Type => GameModeType.Spam;
         public override bool IsFinished => _isFinished;
         private bool _isFinished;
 
@@ -22,7 +23,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
 
         public override void Start()
         {
-            _timer = Config.EventDuration;
+            _timer = _config.EventDuration;
 
             _playersInputsCount = new int[PlayerManager.PlayersCount()];
             _offset = UnityEngine.Random.Range(0, 2);
@@ -64,8 +65,8 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
             foreach (int winnerIndex in winnersIndex)
             {
                 Player.Player player = players[winnerIndex];
-                player.AddScore(Config.ScoreGain);
-                Config.GameModeStoppedEvent.Raise(player);
+                player.AddScore(_config.ScoreGain);
+                _config.GameModeStoppedEvent.Raise(player);
             }
             _isFinished = true;
         }

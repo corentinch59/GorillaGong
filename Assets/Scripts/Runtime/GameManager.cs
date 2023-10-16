@@ -6,9 +6,11 @@ using GorillaGong.Runtime.GameModes;
 using GorillaGong.Runtime.GameModes.Factory;
 using GorillaGong.Runtime.GameStates;
 using GorillaGong.Runtime.Player;
+using GorillaGong.Runtime.Variables;
 using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GorillaGong.Runtime
 {
@@ -35,6 +37,8 @@ namespace GorillaGong.Runtime
         [SerializeField] private FloatVariable _gameStartTimer;
         [SerializeField] private FloatVariable _gameModePreparationTimer;
         [SerializeField] private FloatVariable _gameModeTransitionTimer;
+        [SerializeField] private GameModeTypeVariable _currentGameModeType;
+        [SerializeField] private GameModeConfigVariable _currentGameModeConfig;
         
         private IGameMode _currentGameMode;
         private IGameMode _mainGameMode;
@@ -76,7 +80,7 @@ namespace GorillaGong.Runtime
             }
             
             _mainGameMode = _gameModeFactory.Create(GameModeType.Main);
-            _currentGameMode = _mainGameMode;
+            SetCurrentGameMode(_mainGameMode);
             _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,
                 _gameModesIntervalInSecondsMinMax.Value.y);
             _currentGameMode.Start();
@@ -110,7 +114,7 @@ namespace GorillaGong.Runtime
                 {
                     _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,
                         _gameModesIntervalInSecondsMinMax.Value.y);
-                    _currentGameMode = _mainGameMode;
+                    SetCurrentGameMode(_mainGameMode);
                     _currentGameMode.Start();
                 }
                 return;
@@ -140,7 +144,7 @@ namespace GorillaGong.Runtime
                     if (_gameModePreparationTimer.Value <= 0f)
                     {
                         Debug.Log("Starting new game mode");
-                        _currentGameMode = _gameModeFactory.CreateRandom();
+                        SetCurrentGameMode(_gameModeFactory.CreateRandom());
                         _currentGameMode.Start();
                     }
                 }
@@ -154,7 +158,7 @@ namespace GorillaGong.Runtime
                 return;
             }
             _currentGameMode.Stop();
-            _currentGameMode = null;
+            SetCurrentGameMode(null);
             _gameModeTransitionTimer.Value = _gameModeEndTransitionDuration.Value;
             Debug.Log("Stopped game mode");
         }
@@ -184,6 +188,14 @@ namespace GorillaGong.Runtime
             _gameFinishedEvent.Raise(winningPlayer);
 
             _currentGameMode.Stop();
+        }
+
+        private void SetCurrentGameMode(IGameMode newGameMode)
+        {
+            _currentGameMode = newGameMode;
+            
+            _currentGameModeType.Value = _currentGameMode?.Type ?? GameModeType.None;
+            _currentGameModeConfig.Value = _currentGameMode?.ConfigBase;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace GorillaGong.Runtime.GameModes.MainGameMode
 {
     public class MainGameMode : GameMode<MainGameModeConfig>
     {
+        public override GameModeType Type => GameModeType.Main;
         public override bool IsFinished => false;
         
         private List<Pattern> _patterns = new();
@@ -81,7 +82,7 @@ namespace GorillaGong.Runtime.GameModes.MainGameMode
                 Pattern generatedPattern;
 
                 float random = UnityEngine.Random.Range(0f, 1f);
-                if (random < Config.DoubleInputProbability)
+                if (random < _config.DoubleInputProbability)
                 {
                     int[] inputs = new int[2];
                     inputs[0] = GenerateRandomInput();
@@ -107,13 +108,13 @@ namespace GorillaGong.Runtime.GameModes.MainGameMode
             _playersDeathTimer = new float[PlayerManager.PlayersCount()];
             for (int i = 0; i < _playersDeathTimer.Length; i++)
             {
-                _playersDeathTimer[i] = Config.DeathTime;
+                _playersDeathTimer[i] = _config.DeathTime;
             }
         }
 
         private void ResetPlayerDeathTimer(Player.Player player)
         {
-            _playersDeathTimer[player.Index] = Config.DeathTime;
+            _playersDeathTimer[player.Index] = _config.DeathTime;
         }
         #endregion
     }
