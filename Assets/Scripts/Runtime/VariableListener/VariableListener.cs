@@ -6,7 +6,7 @@ namespace GorillaGong.Runtime
 {
     public class VariableListener<T> : MonoBehaviour
     {
-        [SerializeReference] private BaseVariable<T> _variable;
+        [SerializeReference] protected BaseVariable<T> _variable;
         [SerializeField] private UnityEvent<T> _response;
         private void OnEnable()
         {
@@ -18,7 +18,7 @@ namespace GorillaGong.Runtime
             _variable.RemoveListener(OnVariableValueChanged);
         }
 
-        private void OnVariableValueChanged()
+        public virtual void OnVariableValueChanged()
         {
             _response.Invoke(_variable.Value);
         }

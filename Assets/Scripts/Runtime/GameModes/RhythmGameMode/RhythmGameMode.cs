@@ -7,6 +7,7 @@ namespace Runtime.GameModes.RhythGameMode
     public class RhythmGameMode : GameMode<RhythmGameModeConfig>
     {
         private bool _isFinished;
+        public override GameModeType Type { get; }
         public override bool IsFinished => _isFinished;
 
         public RhythmGameMode(RhythmGameModeConfig gameModeConfig) : base(gameModeConfig)
