@@ -187,7 +187,7 @@ namespace GorillaGong.Runtime
             _gameState.Value = GameState.GameOver;
             _gameFinishedEvent.Raise(winningPlayer);
 
-            _currentGameMode.Stop();
+            SetCurrentGameMode(null);
         }
 
         private void SetCurrentGameMode(IGameMode newGameMode)
