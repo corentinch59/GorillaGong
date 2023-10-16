@@ -205,8 +205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74592d2a7ff1447a9682186a61fa17cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPatterns: {fileID: 11400000, guid: 68616e8b169f3c84ba44adb16bba31f9, type: 2}
-  _playerIndex: 0
+  <PlayerPatterns>k__BackingField: {fileID: 11400000, guid: 68616e8b169f3c84ba44adb16bba31f9,
+    type: 2}
+  <PlayerIndex>k__BackingField: 0
   _images:
   - {fileID: 4160232097062388444}
   - {fileID: 994379175270779980}

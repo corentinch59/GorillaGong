@@ -1688,6 +1688,11 @@ PrefabInstance:
       propertyPath: _playerIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5694782687083596319, guid: 90d193ffb1037474cbaecd08dd051a9e,
+        type: 3}
+      propertyPath: <PlayerIndex>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6037456245325610947, guid: 90d193ffb1037474cbaecd08dd051a9e,
         type: 3}
       propertyPath: m_AnchorMax.y
