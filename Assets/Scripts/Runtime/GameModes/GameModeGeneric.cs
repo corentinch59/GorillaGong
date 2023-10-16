@@ -4,13 +4,14 @@ namespace GorillaGong.Runtime.GameModes
 {
     public abstract class GameMode<T> : GameMode where T : GameModeConfig
     {
-        protected readonly T Config;
+        public override GameModeConfig ConfigBase => _config;
+        protected T _config { get; private set; }
         public override bool IsPlaying => !IsFinished && _isPlaying;
         protected bool _isPlaying;
 
         protected GameMode(T gameModeConfig)
         {
-            Config = gameModeConfig;
+            _config = gameModeConfig;
         }
         
         public override void Start()
@@ -21,7 +22,7 @@ namespace GorillaGong.Runtime.GameModes
                 PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
             }
             
-            Config.GameModeStartedEvent.Raise();
+            _config.GameModeStartedEvent.Raise();
 
             _isPlaying = true;
         }
@@ -52,13 +53,13 @@ namespace GorillaGong.Runtime.GameModes
 
         protected virtual void OnPlayerSuccess(Player.Player player)
         {
-            player.AddScore(Config.ScoreGain);
+            player.AddScore(_config.ScoreGain);
             PlayerSuccessEvent.Raise(player);
         }
 
         protected virtual void OnPlayerFailed(Player.Player player)
         {
-            player.RemoveScore(Config.ScoreLoss);
+            player.RemoveScore(_config.ScoreLoss);
             PlayerFailEvent.Raise(player);
         }
 

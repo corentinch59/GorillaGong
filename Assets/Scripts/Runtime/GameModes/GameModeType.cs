@@ -2,6 +2,7 @@
 {
     public enum GameModeType
     {
+        None = -1,
         Main,
         Spam,
         Rhythm,

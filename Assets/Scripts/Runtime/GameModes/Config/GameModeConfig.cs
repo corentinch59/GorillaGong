@@ -6,6 +6,10 @@ namespace GorillaGong.Runtime.GameModes.Config
 {
     public abstract class GameModeConfig : ScriptableObject
     {
+        [field: Header("Display")]
+        [field: SerializeField]
+        public string Title { get; private set; }
+        
         [field: Header("Events")]
         [field: SerializeField] 
         public GameEvent GameModeStartedEvent { get; private set; }
