@@ -1,4 +1,5 @@
 using GorillaGong.Runtime.GameModes.Config;
+using GorillaGong.Runtime.Patterns;
 using UnityEngine;
 
 namespace Runtime.GameModes.RhythGameMode
@@ -7,6 +8,7 @@ namespace Runtime.GameModes.RhythGameMode
     public class RhythmGameModeConfig : GameModeConfig
     {
         [field: Header("Rhythm Game Mode Specific")]
+        [field: SerializeField] public RythmGameModePatternsVariable RythmGameModePatterns { get; private set; }
         [field: SerializeField] public float TimeBeforeSuccessInput { get; private set; }
     }
 }
