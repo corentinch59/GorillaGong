@@ -116,8 +116,8 @@ Material:
     - _isToggled: 0
     m_Colors:
     - _BarColor: {r: 0.70195526, g: 0.7075472, b: 0.496618, a: 1}
-    - _BarColor1: {r: 1, g: 1, b: 1, a: 1}
-    - _BarColor2: {r: 0, g: 0, b: 0, a: 1}
+    - _BarColor1: {r: 0.049602553, g: 0.7924528, b: 0, a: 1}
+    - _BarColor2: {r: 0.21412794, g: 0.8773585, b: 0.21023493, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
