@@ -1391,7 +1391,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 3
         m_NumAlphaKeys: 3
       minGradient:
@@ -9808,7 +9808,7 @@ GameObject:
   - component: {fileID: 5534454688105729285}
   - component: {fileID: 5534454688105729284}
   m_Layer: 0
-  m_Name: EatParticle
+  m_Name: ImpactEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
