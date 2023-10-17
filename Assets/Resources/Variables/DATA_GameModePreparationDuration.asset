@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
   m_Name: DATA_GameModePreparationDuration
   m_EditorClassIdentifier: 
+  _description: Duration before the start of the new game mode after the main game
+    mode stopped
+  <Debug>k__BackingField: 0
   _value: 3
   _readOnly: 0
   _raiseWarning: 1

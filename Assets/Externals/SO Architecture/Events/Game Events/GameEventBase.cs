@@ -64,6 +64,10 @@ namespace ScriptableObjectArchitecture
 
         public List<StackTraceEntry> StackTraces { get { return _stackTraces; } }
         private List<StackTraceEntry> _stackTraces = new List<StackTraceEntry>();
+
+#if UNITY_EDITOR
+        [SerializeField, TextArea(2, 10)] private string _description;
+#endif
         
         [field: SerializeField]
         public bool Debug { get; set; }

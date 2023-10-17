@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9377ffeb64ba30478a995a8ffc78ae8, type: 3}
   m_Name: DATA_ScoreToReach
   m_EditorClassIdentifier: 
+  _description: Score to reach to win the game
+  <Debug>k__BackingField: 0
   _value: 100
   _readOnly: 0
   _raiseWarning: 1

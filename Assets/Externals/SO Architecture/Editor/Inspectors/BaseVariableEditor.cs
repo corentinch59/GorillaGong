@@ -41,6 +41,10 @@ namespace ScriptableObjectArchitecture.Editor
         {
             serializedObject.Update();
 
+            DrawDescription();
+            
+            EditorGUILayout.Space();
+            
             DrawValue();
 
             EditorGUILayout.Space();
@@ -48,6 +52,12 @@ namespace ScriptableObjectArchitecture.Editor
             DrawClampedFields();
             DrawReadonlyField();
         }
+
+        private void DrawDescription()
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_description"));
+        }
+
         protected virtual void DrawValue()
         {
             GenericPropertyDrawer.DrawPropertyDrawerLayout(_valueProperty, Target.Type);
