@@ -20,6 +20,7 @@ namespace GorillaGong.Runtime.GameModes
         public abstract void Start();
         public abstract void Update(float deltaTime);
         public abstract void Stop();
+        public abstract void Disable();
 
         #region Setters
         public GameMode SetPlayerManager(PlayerManager value)

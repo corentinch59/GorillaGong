@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Threading.Tasks;
 using GorillaGong.Runtime.GameEvents;
 using GorillaGong.Runtime.GameModes;
 using GorillaGong.Runtime.GameModes.Factory;
@@ -10,7 +9,6 @@ using GorillaGong.Runtime.Variables;
 using ScriptableObjectArchitecture;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GorillaGong.Runtime
 {
@@ -62,11 +60,17 @@ namespace GorillaGong.Runtime
 
             _gameStartRequestedEvent.AddListener(StartGame);
         }
-
+        
+        private void OnDestroy()
+        {
+            _disposables?.Dispose();
+            _disposables = null;
+        }
+        
         private void StartGame()
         {
             StartCoroutine(StartGameAsync());
-            _gameStartedEvent.RemoveListener(StartGame);
+            _gameStartRequestedEvent.RemoveListener(StartGame);
         }
         private IEnumerator StartGameAsync()
         {
@@ -163,12 +167,6 @@ namespace GorillaGong.Runtime
             Debug.Log("Stopped game mode");
         }
 
-        private void OnDestroy()
-        {
-            _disposables?.Dispose();
-            _disposables = null;
-        }
-
         private void OnPlayerScoredChanged(Player.Player player, float score)
         {
             if (score < _scoreToReach)
@@ -187,6 +185,7 @@ namespace GorillaGong.Runtime
             _gameState.Value = GameState.GameOver;
             _gameFinishedEvent.Raise(winningPlayer);
 
+            _currentGameMode.Disable();
             SetCurrentGameMode(null);
         }
 
