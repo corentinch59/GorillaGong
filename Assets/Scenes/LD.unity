@@ -353,9 +353,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monki1
       objectReference: {fileID: 0}
+    - target: {fileID: 2012772462599050338, guid: bd9bc43818b35c445a86530c4b85705b,
+        type: 3}
+      propertyPath: <PlayerIndex>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2403101347348544955, guid: bd9bc43818b35c445a86530c4b85705b,
         type: 3}
       propertyPath: <PlayerIndex>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739390987476180883, guid: bd9bc43818b35c445a86530c4b85705b,
+        type: 3}
+      propertyPath: _playerIndex
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
