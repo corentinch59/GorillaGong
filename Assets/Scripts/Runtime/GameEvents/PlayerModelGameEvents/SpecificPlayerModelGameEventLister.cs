@@ -12,6 +12,11 @@ namespace GorillaGong.Runtime
 
         protected override void GameFinished(IPlayerModel player)
         {
+            if (player is null)
+            {
+                return;
+            }
+            
             if (player.Index == _playerIndex)
             {
                 _winResponse.Invoke();
