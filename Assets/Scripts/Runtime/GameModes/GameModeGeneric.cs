@@ -27,7 +27,8 @@ namespace GorillaGong.Runtime.GameModes
             _isPlaying = true;
         }
 
-        public override void Stop()
+        public override void Stop() => Disable();
+        public override void Disable()
         {
             foreach (Player.Player player in PlayerManager.GetPlayers())
             {
