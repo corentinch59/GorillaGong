@@ -187,7 +187,7 @@ MonoBehaviour:
     type: 3}
   _failParticlesPrefab: {fileID: 2262457435510001096, guid: bad97252f72228e499dd85dd6affd95f,
     type: 3}
-  _particlesDestroyTime: 2
+  _particlesDestroyTime: 5
 --- !u!1001 &1631096726038607411
 PrefabInstance:
   m_ObjectHideFlags: 0
