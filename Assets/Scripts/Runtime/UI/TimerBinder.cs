@@ -12,8 +12,13 @@ namespace Runtime.UI
 
         public override void OnVariableValueChanged()
         {
-            base.OnVariableValueChanged();
-            _text.text = _variable.Value.ToString("F1");
+            if (_variable.Value >= 0.5f)
+                base.OnVariableValueChanged();
+            _text.text = _variable.Value.ToString("#");
+            if (_variable.Value < 1)
+            {
+                _text.text = "0";
+            }
         }
     }
 }
