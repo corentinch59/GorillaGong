@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5534454687052946841, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5534454687052946842, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -36,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 5534454687052946842, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
         type: 3}
       propertyPath: InitialModule.startColor.minColor.a
-      value: 1
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 5534454687052946842, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
         type: 3}
@@ -51,12 +56,12 @@ PrefabInstance:
     - target: {fileID: 5534454687052946842, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1
-      value: 60138
+      value: 50886
       objectReference: {fileID: 0}
     - target: {fileID: 5534454687052946842, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime1
-      value: 60331
+      value: 50693
       objectReference: {fileID: 0}
     - target: {fileID: 5534454687052946842, guid: 7f22ebc170dc0c34dbb4b8833eae7c53,
         type: 3}
