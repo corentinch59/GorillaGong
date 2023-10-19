@@ -6,7 +6,7 @@ namespace GorillaGong.Runtime
 {
     public class GorillaMaterialPatcher : PlayerPatternsReactive
     {
-        [SerializeField] private MeshRenderer _renderer;
+        [SerializeField] private Renderer _renderer;
         [SerializeField] private int[] _materialsIndexes;
         private Material[] _materials;
         private Color[] _defaultColors;
