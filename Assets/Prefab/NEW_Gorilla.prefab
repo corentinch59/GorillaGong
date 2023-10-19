@@ -171,8 +171,8 @@ MonoBehaviour:
   <PlayerIndex>k__BackingField: 0
   _renderer: {fileID: 8293369493129637673}
   _materialsIndexes: 00000000050000000400000006000000
-  _materialColorName: _BaseColor
-  _highlightedZoneColor: {r: 0, g: 1, b: 0, a: 1}
+  _highlightedZoneMaterial: {fileID: 2100000, guid: 9db7b1ddb27f09842a2edabc2a02c118,
+    type: 2}
 --- !u!114 &7069112585995139777
 MonoBehaviour:
   m_ObjectHideFlags: 0

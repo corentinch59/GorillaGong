@@ -6,11 +6,12 @@ namespace GorillaGong.Runtime.RuntimeSets.Listeners
 {
     public abstract class RuntimeSetListener<T> : MonoBehaviour
     {
-        [SerializeField] protected RuntimeSet<T> RuntimeSet { get; private set; }
+        [field: SerializeField] protected RuntimeSet<T> RuntimeSet { get; private set; }
         private CompositeDisposable _disposables;
         
         private void OnEnable()
         {
+            _disposables = new CompositeDisposable();
             _disposables.Add(
             RuntimeSet.ReadOnlyCollection.ObserveReplace().Subscribe(OnValueChanged)
             );
