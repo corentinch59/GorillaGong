@@ -1,4 +1,5 @@
-﻿using GorillaGong.Runtime.Inputs;
+﻿using System;
+using GorillaGong.Runtime.Inputs;
 using UnityEngine;
 
 namespace GorillaGong.Runtime
@@ -15,6 +16,13 @@ namespace GorillaGong.Runtime
         private void OnEnable()
         {
             _playerInputEvent.AddListener(OnPlayerInputEvent);
+            
+            _animator.SetLayerWeight(0, 0f);
+        }
+
+        private void OnDisable()
+        {
+            _playerInputEvent.RemoveListener(OnPlayerInputEvent);
         }
 
         private void OnPlayerInputEvent(PlayerInput playerInput)

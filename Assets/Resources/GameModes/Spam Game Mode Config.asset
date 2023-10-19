@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd59652f3c34d8eb71a8fff81a7ed20, type: 3}
   m_Name: Spam Game Mode Config
   m_EditorClassIdentifier: 
-  <Title>k__BackingField: 
+  <Title>k__BackingField: Chest Drum
   <GameModeStartedEvent>k__BackingField: {fileID: 11400000, guid: 02dd790fd222c8846a91c9c7c7672350,
     type: 2}
   <GameModeStoppedEvent>k__BackingField: {fileID: 11400000, guid: 2c111b10491c4084eb29d6bed49bcba4,
@@ -20,6 +20,6 @@ MonoBehaviour:
   <WinnerScoreGain>k__BackingField: 20
   <LoserScoreGain>k__BackingField: 10
   <EventDuration>k__BackingField: 5
-  <PlayersHitCount>k__BackingField: {fileID: 11400000, guid: 19e7d46747ea8b24a8d1d356ea3836af,
+  <PlayersHitCount>k__BackingField: {fileID: 11400000, guid: 7ce13d10069b9fe4d9d43172402fdf34,
     type: 2}
   <VisualBlinkDuration>k__BackingField: 0.2

@@ -13,7 +13,7 @@ namespace Runtime.UI
 
         public void BindTitle()
         {
-            _text.text = "Event Incoming : " + _config.Value.Title;
+            _text.text = _config.Value.Title;
         }
     }
 
