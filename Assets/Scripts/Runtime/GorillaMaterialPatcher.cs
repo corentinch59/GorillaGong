@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GorillaGong.Runtime.Patterns;
 using UnityEngine;
 
@@ -8,31 +9,17 @@ namespace GorillaGong.Runtime
     {
         [SerializeField] private Renderer _renderer;
         [SerializeField] private int[] _materialsIndexes;
-        private Material[] _materials;
-        private Color[] _defaultColors;
         
-        [SerializeField] private string _materialColorName;
-        [SerializeField] private Color _highlightedZoneColor;
+        private List<Material> _defaultRendererMaterials = new List<Material>();
+        private List<Material> _materials = new List<Material>();
+
+        [SerializeField] private Material _highlightedZoneMaterial;
         
         private void Awake()
         {
-            // Populate _materials array
-            List<Material> rendererMaterials = new List<Material>();
-            _renderer.GetMaterials(rendererMaterials);
-            
-            _materials = new Material[_materialsIndexes.Length];
-            for (int i = 0; i < _materials.Length; i++)
-            {
-                _materials[i] = rendererMaterials[_materialsIndexes[i]];
-            }
-            // //
-            
-            // Populate default colors array
-            _defaultColors = new Color[_materials.Length];
-            for (int i = 0; i < _materials.Length; i++)
-            {
-                _defaultColors[i] = _materials[i].GetColor(_materialColorName);
-            }
+            // Get materials from the given Renderer
+            _renderer.GetMaterials(_defaultRendererMaterials);
+            _materials = new List<Material>(_defaultRendererMaterials);
             // //
         }
 
@@ -46,11 +33,12 @@ namespace GorillaGong.Runtime
             // Reassign all colors to default values
             if (newValue is null || oldValue is not null)
             {
-                for (int i = 0; i < _materials.Length; i++)
+                _renderer.SetMaterials(_defaultRendererMaterials);
+                for (int i = 0; i < _defaultRendererMaterials.Count; i++)
                 {
-                    _materials[i].SetColor(_materialColorName, _defaultColors[i]);
+                    _materials[i] = _defaultRendererMaterials[i];
                 }
-
+                
                 if (newValue is null)
                 {
                     return;
@@ -61,8 +49,9 @@ namespace GorillaGong.Runtime
             // Change wanted zones color
             foreach (int value in newValue.Values)
             {
-                _materials[value].SetColor(_materialColorName, _highlightedZoneColor);
+                _materials[_materialsIndexes[value]] = _highlightedZoneMaterial;
             }
+            _renderer.SetMaterials(_materials);
         }
     }
 }
