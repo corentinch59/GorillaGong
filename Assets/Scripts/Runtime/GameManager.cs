@@ -37,7 +37,17 @@ namespace GorillaGong.Runtime
         [SerializeField] private FloatVariable _gameModeTransitionTimer;
         [SerializeField] private GameModeTypeVariable _currentGameModeType;
         [SerializeField] private GameModeConfigVariable _currentGameModeConfig;
-        
+
+        private enum GameplayState
+        {
+            None = -1,
+            MainGameMode,
+            TransitionFromMainToOther,
+            OtherGameMode,
+            TransitionFromOtherToMain
+        }
+
+        private GameplayState _currentGameplayState;
         private IGameMode _currentGameMode;
         private IGameMode _mainGameMode;
         private float _eventTimer;
@@ -47,6 +57,9 @@ namespace GorillaGong.Runtime
         {
             _disposables = new CompositeDisposable();
             _gameState.Value = GameState.Preparation;
+            _currentGameplayState = GameplayState.None;
+
+            SetCurrentGameMode(null);
         }
 
         private void Start()
@@ -90,6 +103,7 @@ namespace GorillaGong.Runtime
             _currentGameMode.Start();
             
             _gameState.Value = GameState.Gameplay;
+            _currentGameplayState = GameplayState.MainGameMode;
             _gameStartedEvent.Raise();
         }
 
@@ -111,60 +125,96 @@ namespace GorillaGong.Runtime
 
         private void GameplayUpdate()
         {
-            if (_currentGameMode is null)
-            {
-                _gameModeTransitionTimer.Value -= Time.deltaTime;
-                if (_gameModeTransitionTimer <= 0f)
-                {
-                    _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,
-                        _gameModesIntervalInSecondsMinMax.Value.y);
-                    SetCurrentGameMode(_mainGameMode);
-                    _currentGameMode.Start();
-                }
-                return;
-            }
-
-            if (_currentGameMode.IsPlaying)
+            if (_currentGameMode is not null && _currentGameMode.IsPlaying)
             {
                 _currentGameMode.Update(Time.deltaTime);
             }
-
-            // Handle game modes timer and game mode preparation
-            if (_currentGameMode == _mainGameMode)
-            {
-                if (_currentGameMode.IsPlaying)
-                {
-                    _eventTimer -= Time.deltaTime;
-                    if (_eventTimer <= 0f)
-                    {
-                        _currentGameMode.Stop();
-                        _gameModePreparationTimer.Value = _gameModePreparationDuration.Value;
-                        Debug.Log("Stopped main game mode");
-                    }
-                }
-                else
-                {
-                    _gameModePreparationTimer.Value -= Time.deltaTime;
-                    if (_gameModePreparationTimer.Value <= 0f)
-                    {
-                        Debug.Log("Starting new game mode");
-                        SetCurrentGameMode(_gameModeFactory.CreateRandom());
-                        _currentGameMode.Start();
-                    }
-                }
-                return;
-            }
             
-            // GameMode is not main game mode
-            // Handle game mode switch on current game mode end
-            if (!_currentGameMode.IsFinished)
+            switch (_currentGameplayState)
+            {
+                case GameplayState.MainGameMode:
+                    _eventTimer -= Time.deltaTime;
+                    if (_eventTimer > 0f)
+                    {
+                        break;
+                    }
+                    SwitchCurrentGameplayState(GameplayState.TransitionFromMainToOther);
+                    break;
+                
+                case GameplayState.TransitionFromMainToOther:
+                    _gameModePreparationTimer.Value -= Time.deltaTime;
+                    if (_gameModePreparationTimer.Value > 0f)
+                    {
+                        break;
+                    }
+                    SwitchCurrentGameplayState(GameplayState.OtherGameMode);
+                    break;
+                
+                case GameplayState.OtherGameMode:
+                    if (!_currentGameMode.IsFinished)
+                    {
+                        break;
+                    }
+                    SwitchCurrentGameplayState(GameplayState.TransitionFromOtherToMain);
+                    break;
+                
+                case GameplayState.TransitionFromOtherToMain:
+                    _gameModeTransitionTimer.Value -= Time.deltaTime;
+                    if (_gameModeTransitionTimer > 0f)
+                    {
+                        break;
+                    }
+                    SwitchCurrentGameplayState(GameplayState.MainGameMode);
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void SwitchCurrentGameplayState(GameplayState gameplayState)
+        {
+            if (gameplayState == _currentGameplayState)
             {
                 return;
             }
-            _currentGameMode.Stop();
-            SetCurrentGameMode(null);
-            _gameModeTransitionTimer.Value = _gameModeEndTransitionDuration.Value;
-            Debug.Log("Stopped game mode");
+            _currentGameplayState = gameplayState;
+
+            switch (_currentGameplayState)
+            {
+                case GameplayState.MainGameMode:
+                    _eventTimer = UnityEngine.Random.Range(_gameModesIntervalInSecondsMinMax.Value.x,
+                        _gameModesIntervalInSecondsMinMax.Value.y);
+                    _currentGameMode.Start();
+                    break;
+                
+                case GameplayState.TransitionFromMainToOther:
+                    Debug.Log("Stopped main game mode");
+                    SwitchCurrentGameMode(_gameModeFactory.CreateRandom());
+                    _gameModePreparationTimer.Value = _gameModePreparationDuration.Value;
+                    break;
+                
+                case GameplayState.OtherGameMode:
+                    Debug.Log("Starting new game mode");
+                    _currentGameMode.Start();
+                    break;
+                
+                case GameplayState.TransitionFromOtherToMain:
+                    Debug.Log("Stopped other game mode");
+                    SwitchCurrentGameMode(_mainGameMode);
+                    _gameModeTransitionTimer.Value = _gameModeEndTransitionDuration.Value;
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void SwitchCurrentGameMode(IGameMode newGameMode = null)
+        {
+            IGameMode oldGameMode = _currentGameMode;
+            SetCurrentGameMode(newGameMode);
+            oldGameMode.Stop();
         }
 
         private void OnPlayerScoredChanged(Player.Player player, float score)
