@@ -2,8 +2,7 @@
 using System.Linq;
 using GorillaGong.Runtime.GameModes.Config;
 using GorillaGong.Runtime.Patterns;
-using ScriptableObjectArchitecture;
-using UnityEngine;
+using UniRx;
 
 namespace GorillaGong.Runtime.GameModes.SpamGameMode
 {
@@ -13,7 +12,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
         public override bool IsFinished => _isFinished;
         private bool _isFinished;
 
-        private Collection<int> PlayersHitCount => _config.PlayersHitCount;
+        private ReactiveCollection<int> PlayersHitCount => _config.PlayersHitCount.ReactiveCollection;
         private int _offset = 0;
         private static readonly int[] WantedInputs = new[] { 0, 1 };
 
@@ -30,10 +29,10 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
             _timer = _config.EventDuration;
             
             // Populate PlayersHitCount
-            _config.PlayersHitCount.Clear();
+            PlayersHitCount.Clear();
             for (int i = 0; i < PlayerManager.PlayersCount(); i++)
             {
-                _config.PlayersHitCount.Add(0);
+                PlayersHitCount.Add(0);
             }
             
             _blinkTimer = _config.VisualBlinkDuration;
