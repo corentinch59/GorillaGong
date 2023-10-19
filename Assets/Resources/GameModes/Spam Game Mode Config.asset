@@ -20,4 +20,6 @@ MonoBehaviour:
   <WinnerScoreGain>k__BackingField: 20
   <LoserScoreGain>k__BackingField: 10
   <EventDuration>k__BackingField: 5
+  <PlayersHitCount>k__BackingField: {fileID: 11400000, guid: 19e7d46747ea8b24a8d1d356ea3836af,
+    type: 2}
   <VisualBlinkDuration>k__BackingField: 0.2

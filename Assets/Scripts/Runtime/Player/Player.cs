@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GorillaGong.Runtime.Inputs;
+using ScriptableObjectArchitecture;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ namespace GorillaGong.Runtime.Player
         [Header("Inputs")] 
         [SerializeField] private PlayerInputGameEvent _playerInputEvent;
         [SerializeField] private float _doubleInputToleranceInSeconds = 0.1f;
+        [SerializeField] private GameEvent _gameRestartInputPressed;
         private List<int> _currentInputs = new List<int>();
         private float _toleranceTimer;
 
@@ -49,6 +51,12 @@ namespace GorillaGong.Runtime.Player
             _actionMap.actions[1].started -= NotifyURpressed;
             _actionMap.actions[2].started -= NotifyBLpressed;
             _actionMap.actions[3].started -= NotifyBRpressed;
+            _actionMap.actions[4].started -= NotifyGameRestartPressed;
+        }
+
+        private void NotifyGameRestartPressed(InputAction.CallbackContext obj)
+        {
+            _gameRestartInputPressed.Raise();
         }
 
         public event UnityAction OnInputTriggered
@@ -73,6 +81,7 @@ namespace GorillaGong.Runtime.Player
                 _actionMap.actions[1].started += NotifyURpressed;
                 _actionMap.actions[2].started += NotifyBLpressed;
                 _actionMap.actions[3].started += NotifyBRpressed;
+                _actionMap.actions[4].started += NotifyGameRestartPressed;
             }
         }
         #endregion
@@ -100,5 +109,7 @@ namespace GorillaGong.Runtime.Player
             // Debug.Log($"Inputs pressed: {string.Join(", ", _currentInputs)} // {_doubleInputToleranceInSeconds - _toleranceTimer}");
             _currentInputs.Clear();
         }
+        
+        
     }
 }

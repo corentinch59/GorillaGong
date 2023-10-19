@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 5694782687083596319}
   - component: {fileID: 1367704800252670009}
   m_Layer: 5
-  m_Name: ZonesPatcher
+  m_Name: DEBUG_ZonesPatcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

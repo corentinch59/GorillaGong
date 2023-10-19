@@ -2,7 +2,7 @@
 using System.Linq;
 using GorillaGong.Runtime.GameModes.Config;
 using GorillaGong.Runtime.Patterns;
-using UnityEngine;
+using UniRx;
 
 namespace GorillaGong.Runtime.GameModes.SpamGameMode
 {
@@ -12,7 +12,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
         public override bool IsFinished => _isFinished;
         private bool _isFinished;
 
-        private int[] _playersInputsCount;
+        private ReactiveCollection<int> PlayersHitCount => _config.PlayersHitCount.ReactiveCollection;
         private int _offset = 0;
         private static readonly int[] WantedInputs = new[] { 0, 1 };
 
@@ -27,7 +27,13 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
         public override void Start()
         {
             _timer = _config.EventDuration;
-            _playersInputsCount = new int[PlayerManager.PlayersCount()];
+            
+            // Populate PlayersHitCount
+            PlayersHitCount.Clear();
+            for (int i = 0; i < PlayerManager.PlayersCount(); i++)
+            {
+                PlayersHitCount.Add(0);
+            }
             
             _blinkTimer = _config.VisualBlinkDuration;
             
@@ -37,11 +43,11 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
         public override void Stop()
         {
             // Give the right amount of score for the winner(s) and the loser(s)
-            IEnumerable<int> winnersIndex = _playersInputsCount.Select((value, index) => (value, index))
-                .Where(tuple => tuple.value == _playersInputsCount.Max())
+            IEnumerable<int> winnersIndex = PlayersHitCount.Select((value, index) => (value, index))
+                .Where(tuple => tuple.value == PlayersHitCount.Max())
                 .Select(tuple => tuple.index);
             IReadOnlyList<Player.Player> players = PlayerManager.GetPlayers(); 
-            for (int i = 0; i < _playersInputsCount.Length; i++)
+            for (int i = 0; i < PlayersHitCount.Count; i++)
             {
                 bool isWinner = winnersIndex.Contains(i);
                 Player.Player player = players[i];
@@ -62,7 +68,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
         protected override void OnPlayerSuccess(Player.Player player)
         {
             PlayerSuccessEvent.Raise(player);
-            _playersInputsCount[player.Index]++;
+            PlayersHitCount[player.Index]++;
             PlayerPatterns.Values[player.Index] = GetPlayerCurrentPattern(player);
         }
 
@@ -98,7 +104,7 @@ namespace GorillaGong.Runtime.GameModes.SpamGameMode
             _blinkTimer = _config.VisualBlinkDuration;
 
             _offset++;
-            for (int i = 0; i < _playersInputsCount.Length; i++)
+            for (int i = 0; i < PlayersHitCount.Count; i++)
             {
                 PlayerPatterns.Values[i] = GetPlayerCurrentPattern(null);
             }

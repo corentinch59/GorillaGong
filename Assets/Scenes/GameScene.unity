@@ -528,6 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInputEvent: {fileID: 11400000, guid: eea9e1ce378f3cc43a6972c2183ea0a6, type: 2}
   _doubleInputToleranceInSeconds: 0.05
+  _gameRestartInputPressed: {fileID: 11400000, guid: 55fe260285a211a4a9b5e64b13d67b6a,
+    type: 2}
   _maxScore: {fileID: 11400000, guid: b47873a76f1b682418b625e479019c29, type: 2}
   _score:
     value: 0

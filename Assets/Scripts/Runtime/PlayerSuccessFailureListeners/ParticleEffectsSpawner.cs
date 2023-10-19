@@ -35,7 +35,7 @@ namespace GorillaGong.Runtime
         {
             foreach (int targets in PlayerPatterns.Values[PlayerIndex].Values)
             {
-                Destroy(GameObject.Instantiate(particlePrefab, _spawnPositions[targets], true), _particlesDestroyTime);
+                Destroy(GameObject.Instantiate(particlePrefab, _spawnPositions[targets]), _particlesDestroyTime);
             }
         }
     }
