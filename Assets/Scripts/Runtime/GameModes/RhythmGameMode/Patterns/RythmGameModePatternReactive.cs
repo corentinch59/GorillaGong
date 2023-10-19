@@ -5,6 +5,7 @@ namespace GorillaGong.Runtime.Patterns
 {
     public abstract class RythmGameModePatternReactive : MonoBehaviour
     {
+        [field: SerializeField] protected int PlayerIndex { get; private set; }
         [field: SerializeField] protected ReadOnlyRythmGameModePatternsVariable PatternVariable { get; private set; }
         private CompositeDisposable _disposables;
 
@@ -12,10 +13,10 @@ namespace GorillaGong.Runtime.Patterns
         {
             _disposables = new CompositeDisposable();
             _disposables.Add(
-            PatternVariable.ReadOnlyPatterns.ObserveAdd().Subscribe(OnNewPatternAdded)
+            PatternVariable.ReadOnlyPatterns[PlayerIndex].ObserveAdd().Subscribe(OnNewPatternAdded)
             );
             _disposables.Add(
-                PatternVariable.ReadOnlyPatterns.ObserveRemove().Subscribe(OnPatternRemoved)    
+                PatternVariable.ReadOnlyPatterns[PlayerIndex].ObserveRemove().Subscribe(OnPatternRemoved)    
             );
         }
 

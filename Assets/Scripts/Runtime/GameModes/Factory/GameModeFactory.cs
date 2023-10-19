@@ -4,6 +4,7 @@ using System.Linq;
 using GorillaGong.Runtime.GameEvents;
 using GorillaGong.Runtime.GameModes.Config;
 using GorillaGong.Runtime.Player;
+using Runtime.GameModes.RhythGameMode;
 using UnityEngine;
 
 namespace GorillaGong.Runtime.GameModes.Factory
@@ -28,6 +29,7 @@ namespace GorillaGong.Runtime.GameModes.Factory
             {
                 GameModeType.Main => new MainGameMode.MainGameMode(gameModeConfig),
                 GameModeType.Spam => new SpamGameMode.SpamGameMode(gameModeConfig),
+                GameModeType.Rhythm => new RhythmGameMode(gameModeConfig),
                 _ => throw new InvalidEnumArgumentException()
             };
             gameMode.SetPlayerManager(_playerManager)

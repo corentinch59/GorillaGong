@@ -1,7 +1,6 @@
 ﻿using GorillaGong.Runtime.GameEvents;
 using ScriptableObjectArchitecture;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GorillaGong.Runtime.GameModes.Config
 {

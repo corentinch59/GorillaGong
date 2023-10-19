@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GorillaGong.Runtime.GameModes;
+using GorillaGong.Runtime.GameModes.Config;
 using GorillaGong.Runtime.Patterns;
 using GorillaGong.Runtime.Player;
+using UniRx;
 using UnityEngine.Assertions.Must;
 
 namespace Runtime.GameModes.RhythGameMode
@@ -14,15 +17,22 @@ namespace Runtime.GameModes.RhythGameMode
         private bool _isFinished;
 
         private int[] _playersScore;
+        private List<RythmGameModePattern> _instantiatedPatterns = new ();
 
-        public RhythmGameMode(RhythmGameModeConfig gameModeConfig) : base(gameModeConfig)
+        private float _spawnCooldown;
+        
+        public RhythmGameMode(GameModeConfig gameModeConfig) 
+            : base(gameModeConfig as RhythmGameModeConfig)
         {
         }
 
         public override void Start()
         {
             base.Start();
-            _playersScore = new int[PlayerManager.PlayersCount()];
+            int playersCount = PlayerManager.PlayersCount();
+            _playersScore = new int[playersCount];
+
+            _config.RythmGameModePatterns.Patterns = new ReactiveCollection<RythmGameModePattern>[playersCount];
         }
 
         public override void Stop()
@@ -42,14 +52,27 @@ namespace Runtime.GameModes.RhythGameMode
                 }
             }
             
+            _config.RythmGameModePatterns.Clear();
+            _instantiatedPatterns.Clear();
+
             base.Stop();
+        }
+
+        public override void Disable()
+        {
+            base.Disable();
+            _config.RythmGameModePatterns.Clear();
         }
 
         public override void Update(float deltaTime)
         {
-            for (int i = 0; i < _config.RythmGameModePatterns.Patterns.Count; i++)
+            // TODO: spawns patterns
+            PatternsSpawnUpdate();
+
+            // Handle spawned patterns destruction and validity
+            for (int i = 0; i < _instantiatedPatterns.Count; i++)
             {
-                RythmGameModePattern rythmGameModePattern = _config.RythmGameModePatterns.Patterns[i];
+                RythmGameModePattern rythmGameModePattern = _instantiatedPatterns[i];
                 rythmGameModePattern.DecreaseDuration(deltaTime);
 
                 if (rythmGameModePattern.CurrentState.Value is RythmGameModePattern.State.NotValid &&
@@ -60,11 +83,36 @@ namespace Runtime.GameModes.RhythGameMode
                 
                 if (rythmGameModePattern.Duration < 0)
                 {
-                    _config.RythmGameModePatterns.Patterns.RemoveAt(i);
+                    // Remove pattern from all lists
+                    foreach (ReactiveCollection<RythmGameModePattern> reactivePatternCollection in _config.RythmGameModePatterns.Patterns)
+                    {
+                        reactivePatternCollection.Remove(rythmGameModePattern);
+                    }
+                    
+                    _instantiatedPatterns.RemoveAt(i);
                     i--;
+                    
                     continue;
                 }
             }
+        }
+
+        private void PatternsSpawnUpdate(in float deltaTime)
+        {
+            _spawnCooldown -= deltaTime;
+            if (_spawnCooldown < 0)
+            {
+                return;
+            }
+            
+            _spawnCooldown = 
+
+            return;
+        }
+
+        private float GetSpawnCooldown()
+        {
+            
         }
 
         protected override void OnPlayerInputPressed(Player player, int[] inputsIds)
@@ -76,7 +124,7 @@ namespace Runtime.GameModes.RhythGameMode
             }
 
             RythmGameModePattern correspondingPattern = null;
-            foreach (RythmGameModePattern rythmGameModePattern in _config.RythmGameModePatterns.Patterns)
+            foreach (RythmGameModePattern rythmGameModePattern in _config.RythmGameModePatterns.Patterns[player.Index])
             {
                 if (!rythmGameModePattern.Pattern.IsInputValid(inputsIds))
                 {
@@ -102,7 +150,7 @@ namespace Runtime.GameModes.RhythGameMode
             {
                 OnPlayerFailed(player);
             }
-            _config.RythmGameModePatterns.Patterns.Remove(correspondingPattern);
+            _config.RythmGameModePatterns.Patterns[player.Index].Remove(correspondingPattern);
         }
 
         protected override void OnPlayerSuccess(Player player)

@@ -6,13 +6,18 @@ namespace GorillaGong.Runtime.Patterns
     [CreateAssetMenu(menuName = "Variables/Pattern Variable")]
     public class RythmGameModePatternsVariable : ReadOnlyRythmGameModePatternsVariable
     {
-        public override IReadOnlyReactiveCollection<RythmGameModePattern> ReadOnlyPatterns => Patterns;
-        public ReactiveCollection<RythmGameModePattern> Patterns { get; set; }
+        public override IReadOnlyReactiveCollection<RythmGameModePattern>[] ReadOnlyPatterns => Patterns;
+        public ReactiveCollection<RythmGameModePattern>[] Patterns { get; set; }
+
+        public void Clear()
+        {
+            Patterns = null;
+        }
     }
     
     public abstract class ReadOnlyRythmGameModePatternsVariable : ScriptableObject
     {
-        public abstract IReadOnlyReactiveCollection<RythmGameModePattern> ReadOnlyPatterns { get; }
+        public abstract IReadOnlyReactiveCollection<RythmGameModePattern>[] ReadOnlyPatterns { get; }
     }
 
     public class RythmGameModePattern
