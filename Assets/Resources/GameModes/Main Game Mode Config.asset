@@ -19,5 +19,5 @@ MonoBehaviour:
     type: 2}
   <WinnerScoreGain>k__BackingField: 1
   <LoserScoreGain>k__BackingField: -2
-  <DeathTime>k__BackingField: 2
+  <DeathTime>k__BackingField: 1.5
   <DoubleInputProbability>k__BackingField: 0.2
