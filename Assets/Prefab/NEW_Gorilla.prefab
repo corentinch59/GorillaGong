@@ -394,8 +394,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3077168137061144101, guid: ed71908ddb208bc418f5b346fd038674,
         type: 3}
+      propertyPath: managedReferences[3944090460575236098].Active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077168137061144101, guid: ed71908ddb208bc418f5b346fd038674,
+        type: 3}
       propertyPath: managedReferences[3944090460575236098].RemapCurveOne
-      value: 2
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3077168137061144101, guid: ed71908ddb208bc418f5b346fd038674,
         type: 3}
