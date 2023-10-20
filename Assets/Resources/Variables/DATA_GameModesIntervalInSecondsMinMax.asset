@@ -18,7 +18,7 @@ MonoBehaviour:
     The duration is taken randomly
     between X and Y'
   <Debug>k__BackingField: 0
-  _value: {x: 15, y: 20}
+  _value: {x: 7, y: 10}
   _readOnly: 0
   _raiseWarning: 1
   _isClamped: 0

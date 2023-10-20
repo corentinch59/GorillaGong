@@ -17,8 +17,8 @@ MonoBehaviour:
     type: 2}
   <GameModeStoppedEvent>k__BackingField: {fileID: 11400000, guid: 2c111b10491c4084eb29d6bed49bcba4,
     type: 2}
-  <WinnerScoreGain>k__BackingField: 20
-  <LoserScoreGain>k__BackingField: 10
+  <WinnerScoreGain>k__BackingField: 7
+  <LoserScoreGain>k__BackingField: 3
   <EventDuration>k__BackingField: 5
   <PlayersHitCount>k__BackingField: {fileID: 11400000, guid: 7ce13d10069b9fe4d9d43172402fdf34,
     type: 2}

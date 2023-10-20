@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7629ea033122ca0408db124e3a20e7e9, type: 3}
   m_Name: Rhythm Game Mode Config
   m_EditorClassIdentifier: 
+  <Title>k__BackingField: 
   <GameModeStartedEvent>k__BackingField: {fileID: 0}
   <GameModeStoppedEvent>k__BackingField: {fileID: 0}
-  <ScoreGain>k__BackingField: 0
-  <ScoreLoss>k__BackingField: 0
+  <WinnerScoreGain>k__BackingField: 10
+  <LoserScoreGain>k__BackingField: 5
+  <TimeBeforeSuccessInput>k__BackingField: 0

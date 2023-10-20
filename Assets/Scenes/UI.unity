@@ -650,7 +650,7 @@ MonoBehaviour:
   ChannelMode: 0
   Channel: 0
   MMChannelDefinition: {fileID: 0}
-  ShakeDuration: 0.5
+  ShakeDuration: 0.2
   PlayOnAwake: 0
   PermanentShake: 0
   Interruptible: 1
@@ -662,7 +662,7 @@ MonoBehaviour:
   Mode: 1
   TargetTransform: {fileID: 0}
   TargetRectTransform: {fileID: 1370197461}
-  ShakeSpeed: 20
+  ShakeSpeed: 10
   ShakeRange: 100
   OscillationOffset: 0
   ShakeMainDirection: {x: 0, y: 0, z: 0}
@@ -4508,12 +4508,12 @@ PrefabInstance:
     - target: {fileID: 4027438001092756809, guid: cf0bec00f0a793a4383980a765b4014d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 720
+      value: 548
       objectReference: {fileID: 0}
     - target: {fileID: 4027438001092756809, guid: cf0bec00f0a793a4383980a765b4014d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -168
+      value: 370
       objectReference: {fileID: 0}
     - target: {fileID: 5281188214271231980, guid: cf0bec00f0a793a4383980a765b4014d,
         type: 3}
@@ -13263,12 +13263,12 @@ PrefabInstance:
     - target: {fileID: 7603208348692849629, guid: cf0bec00f0a793a4383980a765b4014d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -720
+      value: -499
       objectReference: {fileID: 0}
     - target: {fileID: 7603208348692849629, guid: cf0bec00f0a793a4383980a765b4014d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -168
+      value: 370
       objectReference: {fileID: 0}
     - target: {fileID: 8304419868997041095, guid: cf0bec00f0a793a4383980a765b4014d,
         type: 3}
@@ -13373,7 +13373,7 @@ MonoBehaviour:
   ChannelMode: 0
   Channel: 0
   MMChannelDefinition: {fileID: 0}
-  ShakeDuration: 0.5
+  ShakeDuration: 0.2
   PlayOnAwake: 0
   PermanentShake: 0
   Interruptible: 1
@@ -13385,7 +13385,7 @@ MonoBehaviour:
   Mode: 1
   TargetTransform: {fileID: 0}
   TargetRectTransform: {fileID: 5943488914170583546}
-  ShakeSpeed: 20
+  ShakeSpeed: 10
   ShakeRange: 100
   OscillationOffset: 0
   ShakeMainDirection: {x: 0, y: 0, z: 0}

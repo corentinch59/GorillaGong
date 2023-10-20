@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: Duration before the start of the new game mode after the main game
     mode stopped
   <Debug>k__BackingField: 0
-  _value: 3
+  _value: 2
   _readOnly: 0
   _raiseWarning: 1
   _isClamped: 0
